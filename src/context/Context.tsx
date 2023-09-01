@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useState, useEffect } from "react";
+import data from "../data/data.json";
 
 const Context = createContext<ContextVal | undefined>(undefined);
 
@@ -6,7 +7,32 @@ export type FilterProp = {
     id: number;
     text: string;
     selected: boolean;
-}
+};
+
+type UserType = {
+    image: string;
+    name: string;
+    username: string;
+};
+
+export type ProductRequestsType = {
+    id: number;
+    title: string;
+    category: string;
+    upvotes: number;
+    status: string;
+    description: string;
+    comments?: CommentsType[];
+};
+
+type RepliesType = {content: string, replyingTo: string, user: UserType}[];
+
+export type CommentsType = {
+    id: number, 
+    content: string, 
+    user: UserType, 
+    replies?: RepliesType
+};
 
 type ContextVal = {
     windowWidth: number;
@@ -14,9 +40,10 @@ type ContextVal = {
     selectedOption: string;
     filterList: FilterProp[];
     modalActive: boolean;
-    setSelectedOption: React.Dispatch<React.SetStateAction<string>>;
+    feedbackList: ProductRequestsType[];
     setFilterList: React.Dispatch<React.SetStateAction<FilterProp[]>>;
     toggleModal: () => void;
+    handleClickOnSortOption: (text: string) => void;
 };
 
 type ContextType = {
@@ -34,6 +61,11 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
     ]);
     const [selectedOption, setSelectedOption] = useState("Most Upvotes");
     const [modalActive, setModalActive] = useState(false);
+    const [feedbackList, setFeedbackList] = useState(data.productRequests);
+
+    useEffect(() => {
+        console.log(feedbackList)
+    })
 
     useEffect(() => {
         const handleResize = () => {
@@ -57,6 +89,14 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         }
     }, [windowWidth]);
 
+    const handleClickOnSortOption = (text: string) => {
+        setSelectedOption(text)
+        setModalActive(false)
+        const newList = [...filterList];
+        newList.forEach(object =>  object.text === text ? object.selected = true : object.selected = false)
+        setFilterList(newList)
+    };
+
     const toggleModal = () => {
         setModalActive(PrevState => !PrevState);
     };
@@ -67,9 +107,10 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         selectedOption: selectedOption,
         filterList: filterList,
         modalActive: modalActive,
-        setSelectedOption: setSelectedOption,
+        feedbackList: feedbackList,
         setFilterList: setFilterList,
         toggleModal: toggleModal,
+        handleClickOnSortOption: handleClickOnSortOption,
     };
 
     return (

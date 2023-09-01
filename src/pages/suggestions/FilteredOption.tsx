@@ -10,16 +10,12 @@ const FilteredOption: React.FC<{option: FilterProp}> = ( {option} ) => {
         throw new Error("Does not exist in provider")
     }
 
-    const { setSelectedOption } = context;
+    const { handleClickOnSortOption } = context;
 
     const {text, selected} = option; 
 
-    const handleClick = () => {
-        setSelectedOption(text)
-    };
-
   return (
-    <div onClick={handleClick} className='flex justify-between h-full items-center text-base border border-[#3A4374] border-opacity-10 px-6 text-[#647196] hover:text-[#AD1FEA] cursor-pointer'>
+    <div onClick={() => {handleClickOnSortOption(text)}} className='flex justify-between h-full items-center text-base border border-[#3A4374] border-opacity-10 px-6 text-[#647196] hover:text-[#AD1FEA] cursor-pointer'>
          <div>{text}</div>
         {selected && <img src={checkmark} alt="checkmark" />}
     </div>

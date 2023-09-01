@@ -4,7 +4,7 @@ type PropsType = {
 
 const RoadmapContainer = () => {
   return (
-    <div className='bg-white w-[13.938rem] h-[11.125rem]'>
+    <div className='bg-white w-[223px] h-[178px] rounded-[10px]'>
         <div className='flex justify-between px-6 pt-5 pb-6'>
             <p className='text-[1.125rem] font-bold text-[#3A4374] tracking-[-0.25px]'>Roadmap</p>
             <p className='text-[#4661E6] font-semibold underline'>View</p>
