@@ -1,20 +1,21 @@
-type PropsType = {
-
-}
+import StatusContainer from "./StatusContainer"
 
 const RoadmapContainer = () => {
+  
+  const statusList = [
+    {id: 1, type: "Planned", color: "#F49F85"},
+    {id: 2, type: "In-Progress", color: "#AD1FEA"},
+    {id: 3, type: "Live", color: "#62BCFA"}
+  ];
+
   return (
-    <div className='bg-white w-[223px] h-[178px] rounded-[10px]'>
-        <div className='flex justify-between px-6 pt-5 pb-6'>
+    <div className='bg-white w-[223px] h-[178px] rounded-[10px] p-6 flex flex-col justify-between'>
+        <div className='flex items-center justify-between'>
             <p className='text-[1.125rem] font-bold text-[#3A4374] tracking-[-0.25px]'>Roadmap</p>
-            <p className='text-[#4661E6] font-semibold underline'>View</p>
+            <p className='text-[#4661E6] font-semibold underline cursor-pointer hover:text-[#8397F8]'>View</p>
         </div>
-        <div className="flex flex-col justify-between">
-            <div className="flex gap-4">
-                <p>.</p>
-                <p>Planned</p>
-            </div>
-            <p className="font-bold text-[#647196]">0</p>
+        <div className="flex flex-col justify-between w-full h-[85px]">
+          {statusList.map(status => <StatusContainer key={status.id} status={status}/>)}
         </div>
     </div>
   )

@@ -34,6 +34,10 @@ export type CommentsType = {
     replies?: RepliesType
 };
 
+export type CategoryListType = {
+    id: number, text: string, selected: boolean
+}
+
 type ContextVal = {
     windowWidth: number;
     windowSize: string;
@@ -41,9 +45,11 @@ type ContextVal = {
     filterList: FilterProp[];
     modalActive: boolean;
     feedbackList: ProductRequestsType[];
+    categoryList: CategoryListType[];
     setFilterList: React.Dispatch<React.SetStateAction<FilterProp[]>>;
     toggleModal: () => void;
     handleClickOnSortOption: (text: string) => void;
+    handleClickOnCategory: (text: string) => void;
 };
 
 type ContextType = {
@@ -59,13 +65,17 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         {id: 3, text: "Most Comments", selected: false},
         {id: 4, text: "Least Comments", selected: false}
     ]);
+    const [categoryList, setCategoryList] = useState([
+        {id: 1, text: "All", selected: true},
+        {id: 2, text: "UI", selected: false},
+        {id: 3, text: "UX", selected: false},
+        {id: 4, text: "Enhancement", selected: false},
+        {id: 5, text: "Bug", selected: false},
+        {id: 6, text: "Feature", selected: false},
+    ]);
     const [selectedOption, setSelectedOption] = useState("Most Upvotes");
     const [modalActive, setModalActive] = useState(false);
     const [feedbackList, setFeedbackList] = useState(data.productRequests);
-
-    useEffect(() => {
-        console.log(feedbackList)
-    })
 
     useEffect(() => {
         const handleResize = () => {
@@ -101,6 +111,12 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         setModalActive(PrevState => !PrevState);
     };
 
+    const handleClickOnCategory = (text: string) => {
+        const newList = [...categoryList];
+        newList.forEach(object => object.text === text ? object.selected = true : object.selected = false);
+        setCategoryList(newList);
+    };
+
     const contextValue: ContextVal = {
         windowWidth: windowWidth,
         windowSize: windowSize,
@@ -108,9 +124,11 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         filterList: filterList,
         modalActive: modalActive,
         feedbackList: feedbackList,
+        categoryList: categoryList,
         setFilterList: setFilterList,
         toggleModal: toggleModal,
         handleClickOnSortOption: handleClickOnSortOption,
+        handleClickOnCategory: handleClickOnCategory,
     };
 
     return (

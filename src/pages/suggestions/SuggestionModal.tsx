@@ -12,7 +12,7 @@ const SuggestionModal = () => {
     const { filterList } = context;
 
   return (
-    <div className="bg-white rounded-[10px] z-20 w-[12rem] md:w-[15.938rem] h-[12rem] shadow-modalShadow flex flex-col justify-between overflow-hidden absolute left-4 top-16 xl:left-52 xl:top-24">
+    <div className="bg-white rounded-[10px] z-20 w-[12rem] md:w-[15.938rem] h-[12rem] shadow-modalShadow flex flex-col justify-between overflow-hidden absolute left-4 top-16 md:top-20 md:left-52 xl:left-52 xl:top-24">
         {filterList.map(option => {
             return <FilteredOption key={option.id} option={option}/>
         })}

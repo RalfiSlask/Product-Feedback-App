@@ -29,9 +29,9 @@ const FeedbackBoard = () => {
 
   return (
     <div className="flex md:flex-col items-center md:items-start justify-between md:justify-end w-full h-[4.5rem] md:h-[11.125rem] xl:h-[133px] md:w-[13.938rem] md:rounded-[10px] px-6 py-4 md:py-6" style={{backgroundImage: `url(${image})`, backgroundRepeat: "no-repeat", backgroundPosition: "center", backgroundSize: "cover"}}>
-      <div className="text-white leading-normal flex flex-col">
+      <div className="flex flex-col leading-normal text-white">
         <h2 className="tracking-[-0.187px] md:tracking-[-0.25px] font-bold text-[0.9375rem] md:text-[1.25rem]">Frontend Mentor</h2>
-        <p className="opacity-75 font-medium">Feedback Board</p>
+        <p className="font-medium opacity-75">Feedback Board</p>
       </div>
       {windowSize === "mobile" ? <img src={logo} alt="open/close sidebar" className="w-4 h-4 cursor-pointer"/> : null}
     </div>
