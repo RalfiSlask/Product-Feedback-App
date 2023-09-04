@@ -46,10 +46,12 @@ type ContextVal = {
     modalActive: boolean;
     feedbackList: ProductRequestsType[];
     categoryList: CategoryListType[];
+    selectedStatus: string;
     setFilterList: React.Dispatch<React.SetStateAction<FilterProp[]>>;
     toggleModal: () => void;
     handleClickOnSortOption: (text: string) => void;
     handleClickOnCategory: (text: string) => void;
+    handleClickOnStatusSelector: (text: string) => void;
 };
 
 type ContextType = {
@@ -73,6 +75,7 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         {id: 5, text: "Bug", selected: false},
         {id: 6, text: "Feature", selected: false},
     ]);
+    const [selectedStatus, setSelectedStatus] = useState("In-Progress");
     const [selectedOption, setSelectedOption] = useState("Most Upvotes");
     const [modalActive, setModalActive] = useState(false);
     const [feedbackList, setFeedbackList] = useState(data.productRequests);
@@ -117,6 +120,10 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         setCategoryList(newList);
     };
 
+    const handleClickOnStatusSelector = (text: string) => {
+        setSelectedStatus(text)
+    };
+
     const contextValue: ContextVal = {
         windowWidth: windowWidth,
         windowSize: windowSize,
@@ -124,11 +131,13 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         filterList: filterList,
         modalActive: modalActive,
         feedbackList: feedbackList,
+        selectedStatus: selectedStatus,
         categoryList: categoryList,
         setFilterList: setFilterList,
         toggleModal: toggleModal,
         handleClickOnSortOption: handleClickOnSortOption,
         handleClickOnCategory: handleClickOnCategory,
+        handleClickOnStatusSelector: handleClickOnStatusSelector,
     };
 
     return (

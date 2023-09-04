@@ -1,5 +1,5 @@
 import SortSelector from './SortSelector';
-import SuggestionCount from './SuggestionCount';
+import SuggestionCount from './ui/SuggestionCount';
 import ButtonComponent from '../../components/ui/ButtonComponent';
 import SuggestionModal from './SuggestionModal';
 import { useContext } from "react";

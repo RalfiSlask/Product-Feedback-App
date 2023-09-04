@@ -1,12 +1,17 @@
+import { useEffect } from "react";
 import HeadingMedium from "../../components/ui/HeadingMedium";
 import { ProductRequestsType } from "../../context/Context"
-import CommentNumberContainer from "./CommentNumberContainer";
+import CommentNumberContainer from "./ui/CommentNumberContainer";
 import UpvoteContainer from "./UpvoteContainer";
 
 const SuggestionContainer: React.FC<{suggestion:ProductRequestsType}> = ( { suggestion } ) => {
 
      const {title, category, comments, description, upvotes} = suggestion;
      const largeCategory = category.substring(0, 1).toUpperCase() + category.substring(1, category.length);
+
+    useEffect(() => {
+      console.log(upvotes)
+    })
 
   return (
     <div className='w-full h-[200px] md:h-[151px] bg-white rounded-[10px] p-6 md:px-[32px] md:py-[28px] relative flex flex-col justify-between cursor-pointer'>

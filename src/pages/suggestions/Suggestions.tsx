@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import Context from "../../context/Context";
 import SuggestionContainer from "./SuggestionContainer";
 import RoadmapContainer from "./RoadmapContainer";
-import CategoryContainer from "./CategoryContainer";
+import CategoryContainer from "./ui/CategoryContainer";
 
 const Suggestions = () => {
   const context = useContext(Context);

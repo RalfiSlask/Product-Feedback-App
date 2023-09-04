@@ -1,5 +1,5 @@
-import CategoryWrapper from "./CategoryWrapper";
-import { CategoryListType } from "../../context/Context";
+import CategoryWrapper from "../CategoryWrapper";
+import { CategoryListType } from "../../../context/Context";
 
 const CategoryContainer: React.FC<{categories: CategoryListType[]}> = ( {categories} ) => {
 

@@ -1,4 +1,4 @@
-import lightbulb from "../../assets/suggestions/icon-suggestions.svg";
+import lightbulb from "../../../assets/suggestions/icon-suggestions.svg";
 
 const SuggestionCount: React.FC<{count: number}> = ( {count} ) => {
   return (
