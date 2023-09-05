@@ -26,7 +26,7 @@ const Roadmap = () => {
       <header className="flex xl:flex-col justify-between w-full md:w-[689px] xl:w-[1110px] h-[100px] md:h-[113px]">
         <RoadmapHeader />
       </header>
-      <main className="bg-[#F7F8FD] w-full md:w-[689px] xl:w-[1110px] flex flex-col items-center">
+      <main className="bg-[#F7F8FD] w-full md:w-[689px] xl:w-[1110px] flex flex-col items-center mb-[96px]">
         { windowSize === "mobile" && <MobileStatusSelector selectionArray = {statusSectionsArray}/> }
         { windowSize === "mobile" ?  <StatusSection sectionInfo={statusSectionsArray[currIndex]} /> :         
         <div className="w-full flex justify-between">

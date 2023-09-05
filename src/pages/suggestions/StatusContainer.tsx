@@ -1,5 +1,6 @@
 import Context from "../../context/Context";
 import { useContext } from "react";
+import StatusPanelWithColoredDot from "../../components/ui/StatusPanelWithColoredDot";
 
 type StatusPropsType = {
     status: {
@@ -24,10 +25,7 @@ const StatusContainer: React.FC<StatusPropsType> = ( {status} ) => {
 
   return (
     <div className="flex justify-between">
-        <div className="flex items-center gap-4">
-            <p style={{backgroundColor: color}} className="w-2 h-2 rounded-full"></p>
-            <p className="font-normal text-[1rem]">{type}</p>
-        </div>
+        <StatusPanelWithColoredDot color={color} statusType={type}/>
         <p className="font-bold text-[#647196]">{statusCount}</p>
     </div>
   )

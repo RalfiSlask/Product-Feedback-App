@@ -5,7 +5,7 @@ const RoadmapContainer = () => {
   
   const statusList = [
     {id: 1, type: "Planned", color: "#F49F85"},
-    {id: 2, type: "In-Progress", color: "#AD1FEA"},
+    {id: 2, type: "In Progress", color: "#AD1FEA"},
     {id: 3, type: "Live", color: "#62BCFA"}
   ];
 

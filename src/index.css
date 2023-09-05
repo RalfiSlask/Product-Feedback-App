@@ -20,23 +20,6 @@ body {
   align-items: center;
 }
 
-@media screen and (min-width: 768px) {
-  #root {
-    margin-top: 56px;
-    gap: 54px;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  #root {
-    width: 1110px;
-    flex-direction: row;
-    align-items: start;
-    margin-top: 94px;
-    gap: 30px;
-  }
-}
-
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';

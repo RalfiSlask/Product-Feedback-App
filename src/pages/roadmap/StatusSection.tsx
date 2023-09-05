@@ -24,10 +24,12 @@ const StatusSection: React.FC<SectionInfoType> = ( {sectionInfo} ) => {
 
   
   return (
-    <div className="w-[327px] md:w-[223px] xl:w-[350px] flex flex-col my-6">
+    <div className="w-[327px] md:w-[223px] xl:w-[350px] flex flex-col my-6 gap-6">
         <StatusInfo status={status} info={info}/>
-        {feedbackList.filter(object => object.status === status.toLocaleLowerCase()).map(object => 
-        <FeedbackWrapper key={object.id} statusInfo={object} color={color} />)}
+        <div className="flex flex-col gap-4 xl:gap-6">
+            {feedbackList.filter(object => object.status === status.toLocaleLowerCase()).map(object => 
+            <FeedbackWrapper key={object.id} statusInfo={object} color={color} />)}
+        </div>
     </div>
   )
 }

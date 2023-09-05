@@ -32,7 +32,7 @@ const SortingPanel = () => {
 
       <ButtonComponent 
         text={"+ Add Feedback"} 
-        color={"bg-buttonPurple hover:bg-buttonPurpleHover"} 
+        color={"#AD1FEA"} 
         dimensions={"h-10 md:h-11 w-[134px] md:w-[158px]"}
         onClick={handleClick}
       />

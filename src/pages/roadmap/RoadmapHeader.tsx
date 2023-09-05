@@ -1,4 +1,4 @@
-import GoBack from '../../components/GoBack'
+import GoBack from '../../components/ui/GoBack'
 import AddFeedbackButton from '../../components/ui/AddFeedbackButton'
 
 const RoadmapHeader = () => {

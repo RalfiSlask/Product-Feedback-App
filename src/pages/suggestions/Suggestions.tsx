@@ -1,6 +1,6 @@
 import FeedbackBoard from "./FeedbackBoard";
 import SortingPanel from "./SortingPanel";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Context from "../../context/Context";
 import SuggestionContainer from "./SuggestionContainer";
 import RoadmapContainer from "./RoadmapContainer";
@@ -18,6 +18,7 @@ const Suggestions = () => {
 
   return (
     <>
+    <div className="md:mt-[56px] gap-[54px] xl:w-[1110px] flex flex-col xl:flex-row items-center xl:items-start xl:mt-[94px] xl:gap-[30px]">
       <header className="flex xl:flex-col justify-between w-full md:w-[689px] xl:w-[255px] xl:h-[529px]">
         <FeedbackBoard />
        { windowSize !== "mobile" ? <><CategoryContainer categories={categoryList}/><RoadmapContainer /></>: null }
@@ -30,6 +31,7 @@ const Suggestions = () => {
           })}
         </section>
       </main>
+    </div>
     </>
   )
 }
