@@ -18,7 +18,7 @@ const SortSelector = () => {
 
   const handleClick = () => {
     setArrowUp(PrevState => !PrevState)
-    toggleModal();
+    toggleModal("filterModal");
   };
 
   return (

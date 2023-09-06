@@ -15,7 +15,7 @@ const SortingPanel = () => {
 
   const navigate = useNavigate();
 
-  const { modalActive, windowSize, feedbackList } = context;
+  const { modals, windowSize, feedbackList } = context;
 
   const suggestionCount = feedbackList.filter(object => object.status === "suggestion").length;
 
@@ -36,7 +36,7 @@ const SortingPanel = () => {
         dimensions={"h-10 md:h-11 w-[134px] md:w-[158px]"}
         onClick={handleClick}
       />
-      {modalActive && <SuggestionModal />}
+      {modals.filterModal && <SuggestionModal />}
     </div>
   )
 }

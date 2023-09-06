@@ -38,20 +38,35 @@ export type CategoryListType = {
     id: number, text: string, selected: boolean
 }
 
+type ModalState = {
+    filterModal: boolean, categoryModal: boolean, statusModal: boolean
+}
+
+type InputListType = {
+    id: number, label: string, input: string | undefined
+}
+
 type ContextVal = {
     windowWidth: number;
     windowSize: string;
     filterList: FilterProp[];
-    modals: {filterModal: boolean, categoryModal: boolean}
+    modals: ModalState;
     feedbackList: ProductRequestsType[];
     categoryList: CategoryListType[];
     categoryOptionList: CategoryListType[];
+    statusList: CategoryListType[];
     selectedStatus: string;
+    isAddFeedbackBtnPressed: boolean;
+    newInputList: InputListType[]
     setFilterList: React.Dispatch<React.SetStateAction<FilterProp[]>>;
-    toggleModal: () => void;
+    setIsAddFeedbackBtnPressed: React.Dispatch<React.SetStateAction<boolean>>;
+    setNewInputList: React.Dispatch<React.SetStateAction<InputListType[]>>;
+    toggleModal: (modalName: keyof ModalState) => void;
     handleClickOnSortOption: (text: string) => void;
     handleClickOnCategory: (text: string) => void;
+    handleClickOnStatus: (text: string) => void;
     handleClickOnStatusSelector: (text: string) => void;
+    updateNewInputList: (id: number, input: string) => void;
 };
 
 type ContextType = {
@@ -81,10 +96,22 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         {id: 3, text: "Enhancement", selected: false},
         {id: 4, text: "Bug", selected: false},
         {id: 5, text: "Feature", selected: true},
-    ])
+    ]);
+    const [statusList, setStatusList] = useState([
+        {id: 1, text: "Suggestion", selected: false},
+        {id: 2, text: "Planned", selected: false},
+        {id: 3, text: "In-Progress", selected: false},
+        {id: 4, text: "Live", selected: false},
+    ]);
+    const [newInputList, setNewInputList] = useState<InputListType[]>([
+        {id: 1, label: "Feedback Title", input: ""},
+        {id: 2, label: "Category", input: "Feature"},
+        {id: 3, label: "Feedback Detail", input: ""},
+    ]);
     const [selectedStatus, setSelectedStatus] = useState("In-Progress");
-    const [modals, setModals] = useState({filterModal: false, categoryModal: false});
+    const [modals, setModals] = useState({filterModal: false, categoryModal: false, statusModal: false});
     const [feedbackList, setFeedbackList] = useState(data.productRequests);
+    const [isAddFeedbackBtnPressed, setIsAddFeedbackBtnPressed] = useState(false);
 
     useEffect(() => {
         const handleResize = () => {
@@ -108,28 +135,53 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         }
     }, [windowWidth]);
 
-    const handleClickOnSortOption = (text: string) => {
-   /*      setModals(false) */
-        const newList = [...filterList];
-        newList.forEach(object =>  object.text === text ? object.selected = true : object.selected = false)
-        setFilterList(newList)
-    };
-
-    const toggleModal = () => {
-        setModals(prev => ({...prev, filterModal: !prev.filterModal}));
-    };
-
-    const handleClickOnCategory = (text: string) => {
-        const newList = [...categoryList];
-        newList.forEach(object => object.text === text ? object.selected = true : object.selected = false);
-        setCategoryList(newList);
+    const toggleModal = (modalName: keyof ModalState) => {
+        setModals(prev => ({...prev, [modalName]: !prev[modalName]}));
     };
 
     const handleClickOnStatusSelector = (text: string) => {
         setSelectedStatus(text)
     };
 
+    /* Making a conscious decision of repeating these functions instead of making a 
+    single function to reduce future complexity */
+
+    const handleClickOnSortOption = (text: string) => {
+        setModals(prev => ({...prev, filterModal: false}))
+        const newList = [...filterList];
+        newList.forEach(object =>  object.text === text ? object.selected = true : object.selected = false)
+        setFilterList(newList)
+    };
+
+    const handleClickOnCategory = (text: string) => {
+        setModals(prev => ({...prev, categoryModal: false}))
+        const newList = [...categoryOptionList];
+        newList.forEach(object => object.text === text ? object.selected = true : object.selected = false);
+        setCategoryOptionList(newList);
+    };
+
+    const handleClickOnStatus = (text: string) => {
+        setModals(prev => ({...prev, statusModal: false}))
+        const newList = [...statusList];
+        newList.forEach(object => object.text === text ? object.selected = true : object.selected = false);
+        setStatusList(newList);
+    };
+
+    const updateNewInputList = (id: number, input: string | undefined) => {
+        const updatedList = [...newInputList]
+        const updatedInput = updatedList.find(object => object.id === id)
+        if(updatedInput) {
+            updatedInput.input = input;
+        }
+        setNewInputList(updatedList)
+    };
+
+    useEffect(() => {
+        console.log(newInputList)
+    }, [newInputList])
+
     const contextValue: ContextVal = {
+        // states
         windowWidth: windowWidth,
         windowSize: windowSize,
         filterList: filterList,
@@ -138,11 +190,20 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         selectedStatus: selectedStatus,
         categoryList: categoryList,
         categoryOptionList: categoryOptionList,
+        statusList: statusList,
+        isAddFeedbackBtnPressed: isAddFeedbackBtnPressed,
+        newInputList: newInputList,
+        // setters
         setFilterList: setFilterList,
+        setIsAddFeedbackBtnPressed: setIsAddFeedbackBtnPressed,
+        setNewInputList: setNewInputList,
+        // functions
         toggleModal: toggleModal,
         handleClickOnSortOption: handleClickOnSortOption,
         handleClickOnCategory: handleClickOnCategory,
+        handleClickOnStatus: handleClickOnStatus, 
         handleClickOnStatusSelector: handleClickOnStatusSelector,
+        updateNewInputList: updateNewInputList,
     };
 
     return (
