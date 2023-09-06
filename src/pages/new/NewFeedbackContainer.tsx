@@ -2,15 +2,16 @@ import ButtonComponent from "../../components/ui/ButtonComponent";
 import BigHeading from "./BigHeading";
 import { useNavigate } from "react-router-dom";
 import Input from "./Input";
-import SelectorInput from "./SelectorInput";
+import CategoryInput from "./CategoryInput";
 import TextareaInput from "./TextareaInput";
 import FormLabelAndInfo from "./FormLabelAndInfo";
 
 const NewFeedbackContainer = () => {
+  
   const newFeedbackArray = [
     {id: 1, label: "Feedback Title", description: "Add a short, descriptive headline", input: <Input />},
-    {id: 1, label: "Category", description: "Choose a category for your feedback", input: <SelectorInput />},
-    {id: 1, label: "Feedback Detail", description: "Include any specific comments on what should be improved, added, etc.", input: <TextareaInput />},
+    {id: 2, label: "Category", description: "Choose a category for your feedback", input: <CategoryInput />},
+    {id: 3, label: "Feedback Detail", description: "Include any specific comments on what should be improved, added, etc.", input: <TextareaInput />},
   ];
 
   const navigate = useNavigate();
@@ -25,11 +26,11 @@ const NewFeedbackContainer = () => {
       <div className="flex flex-col gap-6">
           {newFeedbackArray.map((object, index) => {
             const { id, label, description, input} = object;
-            return <div className="flex flex-col gap-4"> <FormLabelAndInfo key={id} title={label} description={description} /> 
+            return <div key={id} className="flex flex-col gap-4"> <FormLabelAndInfo title={label} description={description} /> 
             {input}
             </div>})}
       </div>
-      <div className="flex flex-col md:flex-row gap-4 mt-4 justify-end">
+      <div className="flex flex-col justify-end gap-4 mt-4 md:flex-row">
         <ButtonComponent 
           text="Cancel"
           color="#3A4374"

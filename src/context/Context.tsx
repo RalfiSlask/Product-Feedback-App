@@ -41,11 +41,11 @@ export type CategoryListType = {
 type ContextVal = {
     windowWidth: number;
     windowSize: string;
-    selectedOption: string;
     filterList: FilterProp[];
-    modalActive: boolean;
+    modals: {filterModal: boolean, categoryModal: boolean}
     feedbackList: ProductRequestsType[];
     categoryList: CategoryListType[];
+    categoryOptionList: CategoryListType[];
     selectedStatus: string;
     setFilterList: React.Dispatch<React.SetStateAction<FilterProp[]>>;
     toggleModal: () => void;
@@ -75,9 +75,15 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         {id: 5, text: "Bug", selected: false},
         {id: 6, text: "Feature", selected: false},
     ]);
+    const [categoryOptionList, setCategoryOptionList] = useState([
+        {id: 1, text: "UI", selected: false},
+        {id: 2, text: "UX", selected: false},
+        {id: 3, text: "Enhancement", selected: false},
+        {id: 4, text: "Bug", selected: false},
+        {id: 5, text: "Feature", selected: true},
+    ])
     const [selectedStatus, setSelectedStatus] = useState("In-Progress");
-    const [selectedOption, setSelectedOption] = useState("Most Upvotes");
-    const [modalActive, setModalActive] = useState(false);
+    const [modals, setModals] = useState({filterModal: false, categoryModal: false});
     const [feedbackList, setFeedbackList] = useState(data.productRequests);
 
     useEffect(() => {
@@ -103,15 +109,14 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
     }, [windowWidth]);
 
     const handleClickOnSortOption = (text: string) => {
-        setSelectedOption(text)
-        setModalActive(false)
+   /*      setModals(false) */
         const newList = [...filterList];
         newList.forEach(object =>  object.text === text ? object.selected = true : object.selected = false)
         setFilterList(newList)
     };
 
     const toggleModal = () => {
-        setModalActive(PrevState => !PrevState);
+        setModals(prev => ({...prev, filterModal: !prev.filterModal}));
     };
 
     const handleClickOnCategory = (text: string) => {
@@ -127,12 +132,12 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
     const contextValue: ContextVal = {
         windowWidth: windowWidth,
         windowSize: windowSize,
-        selectedOption: selectedOption,
         filterList: filterList,
-        modalActive: modalActive,
+        modals: modals,
         feedbackList: feedbackList,
         selectedStatus: selectedStatus,
         categoryList: categoryList,
+        categoryOptionList: categoryOptionList,
         setFilterList: setFilterList,
         toggleModal: toggleModal,
         handleClickOnSortOption: handleClickOnSortOption,
