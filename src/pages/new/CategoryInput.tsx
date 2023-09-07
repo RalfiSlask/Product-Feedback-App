@@ -23,7 +23,7 @@ const CategoryInput: React.FC<{id: number}> = ({id}) => {
 
   useEffect(() => {
     if(selectedCategory) {
-      updateNewInputList(id, selectedCategory)
+      updateNewInputList(id, selectedCategory, true)
     }
   }, [selectedCategory])
 

@@ -1,5 +1,5 @@
 import Context from "../../context/Context"
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 
 type PropsType = {
   status: string;

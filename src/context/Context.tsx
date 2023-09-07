@@ -1,50 +1,12 @@
 import { createContext, ReactNode, useState, useEffect } from "react";
 import data from "../data/data.json";
-
-const Context = createContext<ContextVal | undefined>(undefined);
-
-export type FilterProp = {
-    id: number;
-    text: string;
-    selected: boolean;
-};
-
-type UserType = {
-    image: string;
-    name: string;
-    username: string;
-};
-
-export type ProductRequestsType = {
-    id: number;
-    title: string;
-    category: string;
-    upvotes: number;
-    status: string;
-    description: string;
-    comments?: CommentsType[];
-};
-
-type RepliesType = {content: string, replyingTo: string, user: UserType}[];
-
-export type CommentsType = {
-    id: number, 
-    content: string, 
-    user: UserType, 
-    replies?: RepliesType
-};
-
-export type CategoryListType = {
-    id: number, text: string, selected: boolean
-}
-
-type ModalState = {
-    filterModal: boolean, categoryModal: boolean, statusModal: boolean
-}
-
-type InputListType = {
-    id: number, label: string, input: string | undefined
-}
+import {
+    FilterProp,
+    ProductRequestsType,
+    CategoryListType,
+    ModalState,
+    InputListType,
+} from "../ContextTypes";
 
 type ContextVal = {
     windowWidth: number;
@@ -57,7 +19,7 @@ type ContextVal = {
     statusList: CategoryListType[];
     selectedStatus: string;
     isAddFeedbackBtnPressed: boolean;
-    newInputList: InputListType[]
+    newInputList: InputListType[];
     setFilterList: React.Dispatch<React.SetStateAction<FilterProp[]>>;
     setIsAddFeedbackBtnPressed: React.Dispatch<React.SetStateAction<boolean>>;
     setNewInputList: React.Dispatch<React.SetStateAction<InputListType[]>>;
@@ -66,8 +28,10 @@ type ContextVal = {
     handleClickOnCategory: (text: string) => void;
     handleClickOnStatus: (text: string) => void;
     handleClickOnStatusSelector: (text: string) => void;
-    updateNewInputList: (id: number, input: string) => void;
+    updateNewInputList: (id: number, input: string, status: boolean) => void;
 };
+
+const Context = createContext<ContextVal | undefined>(undefined);
 
 type ContextType = {
     children: ReactNode;
@@ -104,9 +68,9 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         {id: 4, text: "Live", selected: false},
     ]);
     const [newInputList, setNewInputList] = useState<InputListType[]>([
-        {id: 1, label: "Feedback Title", input: ""},
-        {id: 2, label: "Category", input: "Feature"},
-        {id: 3, label: "Feedback Detail", input: ""},
+        {id: 1, label: "title", input: "", interacted: false},
+        {id: 2, label: "category", input: "Feature", interacted: true},
+        {id: 3, label: "description", input: "", interacted: false},
     ]);
     const [selectedStatus, setSelectedStatus] = useState("In-Progress");
     const [modals, setModals] = useState({filterModal: false, categoryModal: false, statusModal: false});
@@ -167,7 +131,7 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         setStatusList(newList);
     };
 
-    const updateNewInputList = (id: number, input: string | undefined) => {
+    const updateNewInputList = (id: number, input: string | undefined, status: boolean) => {
         const updatedList = [...newInputList]
         const updatedInput = updatedList.find(object => object.id === id)
         if(updatedInput) {
@@ -176,9 +140,20 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         setNewInputList(updatedList)
     };
 
-    useEffect(() => {
-        console.log(newInputList)
-    }, [newInputList])
+    const createNewFeedbackObject = () => {
+        const inputsArray = newInputList.map(object => object.input)
+        const obj = {...inputsArray}
+
+        const newObject = {
+            id: feedbackList.length + 1,
+            title: inputsArray[0] ? inputsArray[0] : "",
+            category: "",
+            upvotes: 0,
+            status: "suggestion",
+            description: "",
+        }
+        setFeedbackList(prev => [...prev, newObject])
+    };
 
     const contextValue: ContextVal = {
         // states

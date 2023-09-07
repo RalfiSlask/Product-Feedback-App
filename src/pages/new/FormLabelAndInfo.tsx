@@ -6,7 +6,7 @@ type PropsType = {
     title: string;
     description: string;
     errorText?: string;
-}
+};
 
 const FormLabelAndInfo: React.FC<PropsType> = ( {id, title, description, errorText} ) => {
   const context = useContext(Context);
@@ -18,8 +18,9 @@ const FormLabelAndInfo: React.FC<PropsType> = ( {id, title, description, errorTe
   const { newInputList, isAddFeedbackBtnPressed } = context;
 
   const input = newInputList.find(object => object.id === id)?.input;
+  const interactedWith = newInputList.find(object => object.id === id)?.interacted;
 
-  const isItError = isAddFeedbackBtnPressed && input === "";
+  const isItError = (isAddFeedbackBtnPressed || interactedWith)  && input === "";
 
   return (
     <div className="flex flex-col gap-[2px]">

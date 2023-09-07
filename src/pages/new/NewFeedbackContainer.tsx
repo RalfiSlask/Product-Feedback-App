@@ -1,5 +1,5 @@
 import ButtonComponent from "../../components/ui/ButtonComponent";
-import BigHeading from "./BigHeading";
+import BigHeading from "../../components/ui/BigHeading";
 import { useNavigate } from "react-router-dom";
 import Input from "./Input";
 import CategoryInput from "./CategoryInput";
@@ -19,9 +19,9 @@ const NewFeedbackContainer = () => {
 
   useEffect(() => {
     setNewInputList([
-    {id: 1, label: "Feedback Title", input: ""},
-    {id: 2, label: "Category", input: "Feature"},
-    {id: 3, label: "Feedback Detail", input: ""},
+    {id: 1, label: "title", input: "", interacted: false},
+    {id: 2, label: "category", input: "Feature", interacted: true},
+    {id: 3, label: "description", input: "", interacted: false},
     ])
   }, []);
 
@@ -45,13 +45,14 @@ const NewFeedbackContainer = () => {
 
   const handleClickOnCancel = () => {
     navigate(-1)
+    setIsAddFeedbackBtnPressed(false)
   };
 
   return (
     <div className='w-full bg-white rounded-[px] px-6 md:px-[42px] py-11 md:pt-[52px] md:pb-[40px] flex flex-col gap-6'>
       <BigHeading text="Create New Feedback"/>
       <div className="flex flex-col gap-6">
-          {newFeedbackArray.map((object, index) => {
+          {newFeedbackArray.map(object => {
             const { id, label, description, input, error} = object;
             return <div key={id} className="flex flex-col gap-4"> <FormLabelAndInfo id={id} title={label} description={description} errorText={error}/> 
             {input}

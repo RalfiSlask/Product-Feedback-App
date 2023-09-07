@@ -1,6 +1,5 @@
-import { ProductRequestsType } from "../../context/Context"
+import { ProductRequestsType } from "../../ContextTypes";
 import StatusPanelWithColoredDot from "../../components/ui/StatusPanelWithColoredDot";
-import { useEffect } from "react";
 import UpvoteContainer from "../../components/UpvoteContainer";
 import CommentNumberContainer from "../../components/ui/CommentNumberContainer";
 import CategoryWrapperNotClickable from "../../components/ui/CategoryWrapperNotClickable";
@@ -12,10 +11,6 @@ type PropsType = {
 
 const FeedbackWrapper: React.FC<PropsType> = ( {statusInfo, color} ) => {
   const { status, title, category, description, upvotes, comments } = statusInfo;
-
-  useEffect(() => {
-    console.log(statusInfo)
-  }, [])
 
   let statusUppercase = status === "in-progress" ? "In Progress" : status.substring(0, 1).toLocaleUpperCase() + status.substring(1, status.length);
 

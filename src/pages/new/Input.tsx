@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useContext, useEffect } from "react";
+import { ChangeEvent, useState, useContext } from "react";
 import Context from "../../context/Context";
 
 const Input: React.FC<{id: number}> = ( {id} ) => {
@@ -14,8 +14,7 @@ const Input: React.FC<{id: number}> = ( {id} ) => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInput(event.target.value)
-    updateNewInputList(id, event.target.value)
-    setIsAddFeedbackBtnPressed(false)
+    updateNewInputList(id, event.target.value, true)
   };
 
   return (

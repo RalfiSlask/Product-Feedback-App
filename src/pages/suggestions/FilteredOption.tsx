@@ -1,5 +1,5 @@
 import checkmark from "../../assets/shared/icon-check.svg";
-import { FilterProp } from "../../context/Context";
+import { FilterProp } from "../../ContextTypes";
 import { useContext } from "react";
 import Context from "../../context/Context";
 

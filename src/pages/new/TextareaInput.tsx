@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useEffect, useContext } from "react";
+import { ChangeEvent, useState, useContext } from "react";
 import Context from "../../context/Context";
 
 const TextareaInput: React.FC< {id: number, errorText: string} > = ( {id, errorText} ) => {
@@ -10,14 +10,15 @@ const TextareaInput: React.FC< {id: number, errorText: string} > = ( {id, errorT
       throw new Error("Does not exist in provider")
   }
 
-   const { newInputList, isAddFeedbackBtnPressed, updateNewInputList, setIsAddFeedbackBtnPressed } = context;
+  const { newInputList, isAddFeedbackBtnPressed, updateNewInputList, setIsAddFeedbackBtnPressed } = context;
 
-  const isItError = isAddFeedbackBtnPressed && input === "";
+  const interactedWith = newInputList.find(object => object.id === id)?.interacted;
+
+  const isItError = (isAddFeedbackBtnPressed || interactedWith) && input === "";
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setInput(event.target.value)
-    updateNewInputList(id, event.target.value)
-    setIsAddFeedbackBtnPressed(false)
+    updateNewInputList(id, event.target.value, true)
   };
 
   return (

@@ -1,5 +1,5 @@
 import HeadingMedium from "../../components/ui/HeadingMedium";
-import { ProductRequestsType } from "../../context/Context"
+import { ProductRequestsType } from "../../ContextTypes";
 import CommentNumberContainer from "../../components/ui/CommentNumberContainer";
 import UpvoteContainer from "../../components/UpvoteContainer";
 import CategoryWrapperNotClickable from "../../components/ui/CategoryWrapperNotClickable";
