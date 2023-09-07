@@ -20,9 +20,11 @@ type ContextVal = {
     selectedStatus: string;
     isAddFeedbackBtnPressed: boolean;
     newInputList: InputListType[];
+    isLightboxActive: boolean;
     setFilterList: React.Dispatch<React.SetStateAction<FilterProp[]>>;
     setIsAddFeedbackBtnPressed: React.Dispatch<React.SetStateAction<boolean>>;
     setNewInputList: React.Dispatch<React.SetStateAction<InputListType[]>>;
+    setIsLightboxActive: React.Dispatch<React.SetStateAction<boolean>>;
     toggleModal: (modalName: keyof ModalState) => void;
     handleClickOnSortOption: (text: string) => void;
     handleClickOnCategory: (text: string) => void;
@@ -74,6 +76,8 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
     ]);
     const [selectedStatus, setSelectedStatus] = useState("In-Progress");
     const [modals, setModals] = useState({filterModal: false, categoryModal: false, statusModal: false});
+    const [isLightboxActive, setIsLightboxActive] = useState(false);
+    const [sidebarActive, setIsSidebarActive] = useState(false);
     const [feedbackList, setFeedbackList] = useState(data.productRequests);
     const [isAddFeedbackBtnPressed, setIsAddFeedbackBtnPressed] = useState(false);
 
@@ -98,6 +102,12 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
             setWindowSize("desktop")
         }
     }, [windowWidth]);
+
+    useEffect(() => {
+        if(windowSize !== "mobile") {
+            setIsLightboxActive(false)
+        }
+    }, [windowSize])
 
     const toggleModal = (modalName: keyof ModalState) => {
         setModals(prev => ({...prev, [modalName]: !prev[modalName]}));
@@ -168,10 +178,12 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         statusList: statusList,
         isAddFeedbackBtnPressed: isAddFeedbackBtnPressed,
         newInputList: newInputList,
+        isLightboxActive: isLightboxActive,
         // setters
         setFilterList: setFilterList,
         setIsAddFeedbackBtnPressed: setIsAddFeedbackBtnPressed,
         setNewInputList: setNewInputList,
+        setIsLightboxActive: setIsLightboxActive,
         // functions
         toggleModal: toggleModal,
         handleClickOnSortOption: handleClickOnSortOption,

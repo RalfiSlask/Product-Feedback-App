@@ -5,6 +5,7 @@ import Context from "../../context/Context";
 import SuggestionContainer from "./SuggestionContainer";
 import RoadmapContainer from "./RoadmapContainer";
 import CategoryContainer from "./ui/CategoryContainer";
+import Lightbox from "../../components/ui/Lightbox";
 
 const Suggestions = () => {
   const context = useContext(Context);
@@ -12,14 +13,14 @@ const Suggestions = () => {
   if(!context) {
     throw new Error("Does not exist in provider");
   }
-  const { feedbackList, windowSize, categoryList } = context;
+  const { feedbackList, windowSize, categoryList, isLightboxActive } = context;
 
   const [suggestions, setSuggestions] = useState(feedbackList.filter(object => object.status === "suggestion"))
 
   return (
     <>
-    <div className="md:mt-[56px] gap-[54px] xl:w-[1110px] flex flex-col xl:flex-row items-center xl:items-start xl:mt-[94px] xl:gap-[30px]">
-      <header className="flex xl:flex-col justify-between w-full md:w-[689px] xl:w-[255px] xl:h-[529px]">
+    <div className="w-full md:gap-[54px] xl:w-[1110px] flex flex-col xl:flex-row items-center xl:items-start xl:gap-[30px]">
+      <header className="flex xl:flex-col justify-between w-full md:w-[689px] xl:w-[255px] xl:h-[529px] md:mt-[56px] xl:mt-[94px]">
         <FeedbackBoard />
        { windowSize !== "mobile" ? <><CategoryContainer categories={categoryList}/><RoadmapContainer /></>: null }
       </header>
@@ -31,6 +32,7 @@ const Suggestions = () => {
           })}
         </section>
       </main>
+      {isLightboxActive && <Lightbox />}
     </div>
     </>
   )

@@ -15,7 +15,12 @@ const FeedbackBoard = () => {
         throw new Error("Does not exist in provider")
     }
 
-    const { windowSize, windowWidth } = context;
+    const { windowSize, setIsLightboxActive } = context;
+
+    const handleClickOnLogo = () => {
+      logo === logoHamburger ? setLogo(logoClose) : setLogo(logoHamburger)
+      setIsLightboxActive(PrevState => !PrevState)
+    };
 
     useEffect(() => {
       if(windowSize === "mobile") {
@@ -33,7 +38,7 @@ const FeedbackBoard = () => {
         <h2 className="tracking-[-0.187px] md:tracking-[-0.25px] font-bold text-[0.9375rem] md:text-[1.25rem]">Frontend Mentor</h2>
         <p className="font-medium opacity-75">Feedback Board</p>
       </div>
-      {windowSize === "mobile" ? <img src={logo} alt="open/close sidebar" className="w-4 h-4 cursor-pointer"/> : null}
+      {windowSize === "mobile" ? <img onClick={handleClickOnLogo} src={logo} alt="open/close sidebar" className="w-4 h-4 cursor-pointer"/> : null}
     </div>
   )
 }
