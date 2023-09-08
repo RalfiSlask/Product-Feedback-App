@@ -22,7 +22,7 @@ const Suggestions = () => {
     <div className="w-full md:gap-[54px] xl:w-[1110px] flex flex-col xl:flex-row items-center xl:items-start xl:gap-[30px]">
       <header className="flex xl:flex-col justify-between w-full md:w-[689px] xl:w-[255px] xl:h-[529px] md:mt-[56px] xl:mt-[94px]">
         <FeedbackBoard />
-       { windowSize !== "mobile" ? <><CategoryContainer categories={categoryList}/><RoadmapContainer /></>: null }
+       { windowSize !== "mobile" ? <><CategoryContainer /><RoadmapContainer /></>: null }
       </header>
       <main className="bg-[#F7F8FD] w-full md:w-[689px] xl:w-[825px] flex flex-col items-center">
         <SortingPanel />

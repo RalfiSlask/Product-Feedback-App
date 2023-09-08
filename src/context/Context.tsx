@@ -3,7 +3,6 @@ import data from "../data/data.json";
 import {
     ListType,
     ProductRequestsType,
-    CategoryListType,
     ModalState,
     InputListType,
     setListType,
@@ -20,9 +19,9 @@ type ContextVal = {
     filterList: ListType[];
     feedbackList: ProductRequestsType[];
     suggestions: ProductRequestsType[];
-    categoryList: CategoryListType[];
-    categoryOptionList: CategoryListType[];
-    statusList: CategoryListType[];
+    categoryList: ListType[];
+    categoryOptionList: ListType[];
+    statusList: ListType[];
     newInputList: InputListType[];
     setFilterList: setListType;
     setCategoryOptionList: setListType;

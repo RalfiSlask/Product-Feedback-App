@@ -31,10 +31,6 @@ export type CommentsType = {
     replies?: RepliesType
 };
 
-export type CategoryListType = {
-    id: number, text: string, selected: boolean
-};
-
 export type ModalState = {
     filterModal: boolean, categoryModal: boolean, statusModal: boolean
 };

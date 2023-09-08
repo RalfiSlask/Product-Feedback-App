@@ -6,6 +6,8 @@ import MainSuggestionsPage from './pages/suggestions/MainSuggestionsPage';
 import Roadmap from './pages/roadmap/Roadmap';
 import { ContextProvider } from './context/Context';
 import CreateNewFeedback from './pages/new/CreateNewFeedback';
+import MainDetailPage from './pages/detail/MainDetailPage';
+import MainEditPage from './pages/edit/MainEditPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -18,6 +20,8 @@ root.render(
           <Route path="/" element={<MainSuggestionsPage />}></Route>
           <Route path="/roadmap" element={<Roadmap />}></Route>
           <Route path="/new" element={<CreateNewFeedback />}></Route>
+          <Route path="/edit" element={<MainEditPage />}></Route>
+          <Route path="/details" element={<MainDetailPage />}></Route>
         </Routes>
       </Router>
     </ContextProvider>
