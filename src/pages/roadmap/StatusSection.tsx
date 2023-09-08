@@ -22,7 +22,6 @@ const StatusSection: React.FC<SectionInfoType> = ( {sectionInfo} ) => {
 
     const { feedbackList } = context;
 
-  
   return (
     <div className="w-[327px] md:w-[223px] xl:w-[350px] flex flex-col my-6 gap-6">
         <StatusInfo status={status} info={info}/>

@@ -23,7 +23,7 @@ const TextareaInput: React.FC< {id: number, errorText: string} > = ( {id, errorT
 
   return (
     <div>
-        <textarea  style={{ resize: 'none' }} spellCheck="false" onChange={(e) => handleChange(e)} className='w-full rounded-[5px] h-[120px] md:h-[96px] bg-[#F7F8FD] outline-none cursor-pointer text-[#3A4374] px-4 md:px-6 border py-4 border-[#F7F8FD] hover:border-[#4661E6]'></textarea>
+        <textarea  style={{ resize: 'none' }} spellCheck="false" onChange={(e) => handleChange(e)} className={`${isItError ? "border-[#D73737]" : "border-[#F7F8FD] hover:border-[#4661E6]"} w-full rounded-[5px] h-[120px] md:h-[96px] bg-[#F7F8FD] outline-none cursor-pointer text-[#3A4374] px-4 md:px-6 border py-4`}></textarea>
         <div className="h-5">
           {isItError && <p className="text-[#D73737] text-[0.8125rem] font-normal">{errorText}</p>}
         </div>

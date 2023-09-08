@@ -15,16 +15,16 @@ const SortingPanel = () => {
 
   const navigate = useNavigate();
 
-  const { modals, windowSize, feedbackList } = context;
+  const { modals, windowSize, suggestions, sidebarActive } = context;
 
-  const suggestionCount = feedbackList.filter(object => object.status === "suggestion").length;
+  const suggestionCount = suggestions.length;
 
   const handleClick = () => {
     navigate("/new")
   };
 
   return (
-    <div className='bg-[#373F68] relative w-full md:rounded-[10px] h-14 md:h-[4.5rem] flex items-center justify-between px-6 text-[#F2F4FE]'>
+    <div className={`${sidebarActive ? "mt-[72px]" : "mt-0"} bg-[#373F68] relative w-full md:rounded-[10px] h-14 md:h-[72px] flex items-center justify-between px-6 text-[#F2F4FE] `}>
       <div className='flex gap-[38px]'>
         {windowSize !== "mobile" ? <SuggestionCount count={suggestionCount}/> : null}
         <SortSelector />

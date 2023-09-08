@@ -11,6 +11,7 @@ body {
   justify-content: center;
   background-color: #F7F8FD;
   color: #647196;
+  overflow-x: hidden;
 }
 
 #root {

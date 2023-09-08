@@ -10,7 +10,7 @@ type PropsType = {
 }
 
 const FeedbackWrapper: React.FC<PropsType> = ( {statusInfo, color} ) => {
-  const { status, title, category, description, upvotes, comments } = statusInfo;
+  const { id, status, title, category, description, upvotes, comments } = statusInfo;
 
   let statusUppercase = status === "in-progress" ? "In Progress" : status.substring(0, 1).toLocaleUpperCase() + status.substring(1, status.length);
 
@@ -24,7 +24,7 @@ const FeedbackWrapper: React.FC<PropsType> = ( {statusInfo, color} ) => {
         </div>
         <CategoryWrapperNotClickable category={category} />
         <div className="flex justify-between">
-          <UpvoteContainer upvotes={upvotes}/>
+          <UpvoteContainer id = {id} upvotes={upvotes}/>
           <CommentNumberContainer comments={comments}/>
         </div>
       </div>

@@ -1,4 +1,4 @@
-export type FilterProp = {
+export type ListType = {
     id: number;
     text: string;
     selected: boolean;
@@ -20,6 +20,8 @@ export type ProductRequestsType = {
     comments?: CommentsType[];
 };
 
+export type setListType = React.Dispatch<React.SetStateAction<ListType[]>>
+
 export type RepliesType = {content: string, replyingTo: string, user: UserType}[];
 
 export type CommentsType = {
@@ -31,15 +33,15 @@ export type CommentsType = {
 
 export type CategoryListType = {
     id: number, text: string, selected: boolean
-}
+};
 
 export type ModalState = {
     filterModal: boolean, categoryModal: boolean, statusModal: boolean
-}
+};
 
 export type InputListType = {
     id: number, label: string, input: string | undefined, interacted: boolean;
-}
+};
 
 
 

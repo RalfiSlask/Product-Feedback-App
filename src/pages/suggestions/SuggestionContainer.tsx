@@ -6,8 +6,7 @@ import CategoryWrapperNotClickable from "../../components/ui/CategoryWrapperNotC
 
 const SuggestionContainer: React.FC<{suggestion:ProductRequestsType}> = ( { suggestion } ) => {
 
-     const {title, category, comments, description, upvotes} = suggestion;
-
+     const {id, title, category, comments, description, upvotes} = suggestion;
 
   return (
     <div className='w-full h-[200px] md:h-[151px] bg-white rounded-[10px] p-6 md:px-[32px] md:py-[28px] relative flex flex-col justify-between cursor-pointer'>
@@ -17,7 +16,7 @@ const SuggestionContainer: React.FC<{suggestion:ProductRequestsType}> = ( { sugg
             <CategoryWrapperNotClickable category={category}/>
         </div>
         <div className="flex items-center justify-between">
-            <UpvoteContainer upvotes={upvotes} suggestion={true}/>
+            <UpvoteContainer upvotes={upvotes} suggestion={true} id={id}/>
             <CommentNumberContainer comments={comments} suggestion={true} />
         </div>
     </div>
