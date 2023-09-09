@@ -5,6 +5,7 @@ import FeedbackContainer from "../../components/FeedbackContainer";
 import Context from "../../context/Context";
 import { useContext } from "react";
 import CommentsContainer from "./CommentsContainer";
+import AddCommentContainer from "./AddCommentContainer";
 
 const MainDetailPage = () => {
     const context = useContext(Context);
@@ -14,7 +15,7 @@ const MainDetailPage = () => {
     }
     
     const { selectedFeedback } = context;
-    
+    const comments = selectedFeedback.comments ? selectedFeedback.comments : undefined;
     const navigate = useNavigate();
     
     const handleClick = () => {
@@ -35,9 +36,10 @@ const MainDetailPage = () => {
                 onClick={handleClick}
             />
         </header>
-        <main className="flex flex-col">
+        <main className="flex flex-col gap-6">
             <FeedbackContainer feedback={selectedFeedback}/>
-            <CommentsContainer />
+            <CommentsContainer comments={comments}/>
+            <AddCommentContainer />
         </main>
   </div>
   )

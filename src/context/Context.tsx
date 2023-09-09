@@ -46,6 +46,8 @@ type ContextType = {
     children: ReactNode;
 };
 
+const initialFeedback = localStorage.getItem("selectedFeedback")
+
 export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [windowSize, setWindowSize] = useState("");
@@ -88,7 +90,7 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
     const [feedbackList, setFeedbackList] = useState(data.productRequests);
     const [isAddFeedbackBtnPressed, setIsAddFeedbackBtnPressed] = useState(false);
     const [suggestions, setSuggestions] = useState<ProductRequestsType[]>(feedbackList.filter(object => object.status === "suggestion"));
-    const [selectedFeedback, setSelectedFeedback] = useState<ProductRequestsType>(feedbackList[0]);
+    const [selectedFeedback, setSelectedFeedback] = useState<ProductRequestsType>(initialFeedback ? JSON.parse(initialFeedback) : feedbackList[0]);
 
     useEffect(() => {
         const handleResize = () => {
@@ -118,13 +120,6 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
             setIsSidebarActive(false)
         }
     }, [windowSize]);
-
-    useEffect(() => {
-        const storedFeedback = localStorage.getItem("selectedFeedback");
-        if(storedFeedback) {
-            setSelectedFeedback(JSON.parse(storedFeedback))
-        }
-    }, []); 
 
     useEffect(() => {
         if(selectedFeedback !== null) {

@@ -22,13 +22,13 @@ export type ProductRequestsType = {
 
 export type setListType = React.Dispatch<React.SetStateAction<ListType[]>>
 
-export type RepliesType = {content: string, replyingTo: string, user: UserType}[];
+export type RepliesType = {content: string, replyingTo: string, user: UserType};
 
 export type CommentsType = {
     id: number, 
     content: string, 
     user: UserType, 
-    replies?: RepliesType
+    replies?: RepliesType[]
 };
 
 export type ModalState = {
