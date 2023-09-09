@@ -23,10 +23,12 @@ type ContextVal = {
     categoryOptionList: ListType[];
     statusList: ListType[];
     newInputList: InputListType[];
+    selectedFeedback: ProductRequestsType;
     setFilterList: setListType;
     setCategoryOptionList: setListType;
     setCategoryList: setListType;
     setIsAddFeedbackBtnPressed: React.Dispatch<React.SetStateAction<boolean>>;
+    setSelectedFeedback: React.Dispatch<React.SetStateAction<ProductRequestsType>>;
     setNewInputList: React.Dispatch<React.SetStateAction<InputListType[]>>;
     toggleModal: (modalName: keyof ModalState) => void;
     toggleSidebar: () => void;
@@ -85,7 +87,8 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
     const [sidebarActive, setIsSidebarActive] = useState(false);
     const [feedbackList, setFeedbackList] = useState(data.productRequests);
     const [isAddFeedbackBtnPressed, setIsAddFeedbackBtnPressed] = useState(false);
-    const [suggestions, setSuggestions] = useState<ProductRequestsType[]>(feedbackList.filter(object => object.status === "suggestion"))
+    const [suggestions, setSuggestions] = useState<ProductRequestsType[]>(feedbackList.filter(object => object.status === "suggestion"));
+    const [selectedFeedback, setSelectedFeedback] = useState<ProductRequestsType>(feedbackList[0]);
 
     useEffect(() => {
         const handleResize = () => {
@@ -114,7 +117,20 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
             setIsLightboxActive(false)
             setIsSidebarActive(false)
         }
-    }, [windowSize])
+    }, [windowSize]);
+
+    useEffect(() => {
+        const storedFeedback = localStorage.getItem("selectedFeedback");
+        if(storedFeedback) {
+            setSelectedFeedback(JSON.parse(storedFeedback))
+        }
+    }, []); 
+
+    useEffect(() => {
+        if(selectedFeedback !== null) {
+            localStorage.setItem("selectedFeedback", JSON.stringify(selectedFeedback))
+        }
+    }, [selectedFeedback]);
 
     const toggleModal = (modalName: keyof ModalState) => {
         setModals(prev => ({...prev, [modalName]: !prev[modalName]}));
@@ -210,12 +226,14 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         isLightboxActive: isLightboxActive,
         sidebarActive: sidebarActive,
         suggestions: suggestions,
+        selectedFeedback: selectedFeedback,
         // setters
         setFilterList: setFilterList,
         setCategoryOptionList: setCategoryOptionList,
         setIsAddFeedbackBtnPressed: setIsAddFeedbackBtnPressed,
         setNewInputList: setNewInputList,
         setCategoryList: setCategoryList,
+        setSelectedFeedback: setSelectedFeedback,
         // functions
         toggleModal: toggleModal,
         toggleSidebar: toggleSidebar,

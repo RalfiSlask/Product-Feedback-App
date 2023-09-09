@@ -1,13 +1,15 @@
 import FeedbackBoard from "./FeedbackBoard";
 import SortingPanel from "./SortingPanel";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import Context from "../../context/Context";
-import SuggestionContainer from "./SuggestionContainer";
+import FeedbackContainer from "../../components/FeedbackContainer";
 import RoadmapContainer from "./RoadmapContainer";
 import CategoryContainer from "./ui/CategoryContainer";
 import Lightbox from "../../components/ui/Lightbox";
 import Sidebar from "./ui/Sidebar";
 import WhiteLightbox from "../../components/ui/WhiteLightbox";
+import { useNavigate } from "react-router-dom";
+import { ProductRequestsType } from "../../ContextTypes";
 
 const MainSuggestionsPage = () => {
   const context = useContext(Context);
@@ -16,11 +18,14 @@ const MainSuggestionsPage = () => {
     throw new Error("Does not exist in provider");
   }
 
-  const { windowSize, isLightboxActive, suggestions, modals } = context;
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log(suggestions)
-  })
+  const handleClick = ( suggestion: ProductRequestsType ) => {
+    navigate("/details")
+    setSelectedFeedback(suggestion)
+  };
+
+  const { windowSize, isLightboxActive, suggestions, modals, setSelectedFeedback } = context;
 
   return (
     <>
@@ -34,7 +39,7 @@ const MainSuggestionsPage = () => {
         <SortingPanel />
         <section className="w-[327px] md:w-full mt-8 md:mt-6 flex flex-col gap-4 xl:gap-5 mb-[129px]">
           {suggestions.map((suggestion, index) => {
-            return <SuggestionContainer key={index} suggestion={suggestion}/>
+            return <FeedbackContainer key={index} feedback={suggestion} onClick={handleClick}/>
           })}
         </section>
       </main>

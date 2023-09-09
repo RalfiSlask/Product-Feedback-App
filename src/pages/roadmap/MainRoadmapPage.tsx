@@ -10,7 +10,7 @@ const statusSectionsArray = [
   {id: 3, status: "Live", info: "Released features", color: "#62BCFA"}
 ]
 
-const Roadmap = () => {
+const MainRoadmapPage = () => {
   const context = useContext(Context);
 
   if(!context) {
@@ -22,14 +22,14 @@ const Roadmap = () => {
   const currIndex = statusSectionsArray.findIndex(element => element.status === selectedStatus)
 
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="flex flex-col items-center w-full">
       <header className="flex xl:flex-col justify-between w-full md:w-[689px] xl:w-[1110px] h-[100px] md:h-[113px]">
         <RoadmapHeader />
       </header>
       <main className="bg-[#F7F8FD] w-full md:w-[689px] xl:w-[1110px] flex flex-col items-center mb-[96px]">
         { windowSize === "mobile" && <MobileStatusSelector selectionArray = {statusSectionsArray}/> }
         { windowSize === "mobile" ?  <StatusSection sectionInfo={statusSectionsArray[currIndex]} /> :         
-        <div className="w-full flex justify-between">
+        <div className="flex justify-between w-full">
           {statusSectionsArray.map(section => <StatusSection key={section.id} sectionInfo={section}/>)}
         </div>}
       </main>
@@ -37,4 +37,4 @@ const Roadmap = () => {
   )
 }
 
-export default Roadmap
+export default MainRoadmapPage
