@@ -13,7 +13,7 @@ const NewFeedbackContainer = () => {
 
   if(!context) {
       throw new Error("Does not exist in provider")
-  }
+  };
 
   const { setIsAddFeedbackBtnPressed, newInputList, setNewInputList } = context;
 

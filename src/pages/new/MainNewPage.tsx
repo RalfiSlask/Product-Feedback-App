@@ -1,7 +1,7 @@
 import GoBack from "../../components/ui/GoBack";
 import NewFeedbackContainer from "./NewFeedbackContainer";
 
-const CreateNewFeedback = () => {
+const MainNewPage = () => {
 
   return (
     <div className="w-[327px] md:w-[540px] flex flex-col mt-8 md:mt-14 xl:mt-24 gap-14 md:gap-16">
@@ -18,4 +18,4 @@ const CreateNewFeedback = () => {
   )
 }
 
-export default CreateNewFeedback
+export default MainNewPage

@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainSuggestionsPage from './pages/suggestions/MainSuggestionsPage';
 import Roadmap from './pages/roadmap/MainRoadmapPage';
 import { ContextProvider } from './context/Context';
-import CreateNewFeedback from './pages/new/CreateNewFeedback';
+import CreateNewFeedback from './pages/new/MainNewPage';
 import MainDetailPage from './pages/detail/MainDetailPage';
 import MainEditPage from './pages/edit/MainEditPage';
 
