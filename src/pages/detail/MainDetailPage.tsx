@@ -12,7 +12,7 @@ const MainDetailPage = () => {
   
     if(!context) {
       throw new Error("Does not exist in provider");
-    }
+    };
     
     const { selectedFeedback } = context;
     const comments = selectedFeedback.comments ? selectedFeedback.comments : undefined;

@@ -1,4 +1,4 @@
-import NumberOfComments from './NumberOfComments';
+import NumberOfComments from './ui/NumberOfComments';
 import { CommentsType } from '../../ContextTypes';
 import CommentWrapper from './CommentWrapper';
 

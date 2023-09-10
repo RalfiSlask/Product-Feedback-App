@@ -1,12 +1,36 @@
 import ButtonComponent from '../../components/ui/ButtonComponent';
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useContext } from "react";
+import Context from '../../context/Context';
+import data from "../../data/data.json";
 
+const AddCommentContainer = ( ) => {
+    const context = useContext(Context);
+  
+    if(!context) {
+      throw new Error("Does not exist in provider");
+    };
 
-const AddCommentContainer = () => {
-    const [charactersLeft, setCharactersLeft] = useState(250)
+    const { feedbackList, selectedFeedback, setFeedbackList } = context;
+    const [input, setInput] = useState("");
+    const [charactersLeft, setCharactersLeft] = useState(250);
 
     const handleClick = () => {
+        const updatedFeedbackList = [...feedbackList];
+        const updatedFeedback = updatedFeedbackList.find(object => object.id === selectedFeedback.id);
+        
+        const foundId = updatedFeedback?.comments ? updatedFeedback.comments?.length - 1 : 0;
+        console.log(updatedFeedback?.comments)
+   
+        
+        console.log(updatedFeedback?.comments)
 
+        const commentObject = {
+            id: 0,
+            content: input, 
+            user: data.currentUser, 
+        };
+        updatedFeedback?.comments?.push(commentObject);
+        /* setFeedbackList(updatedFeedbackList) */
     };
 
     const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -23,6 +47,7 @@ const AddCommentContainer = () => {
                 text="Post Comment" 
                 color="#AD1FEA" 
                 dimensions='w-[119px] md:w-[144px] h-10 md:h-[44px]'
+                onClick={handleClick}
             />
         </div>
     </div>

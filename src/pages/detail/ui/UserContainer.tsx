@@ -1,9 +1,9 @@
-import { UserType } from "../../ContextTypes";
+import { UserType } from "../../../ContextTypes";
 
 const UserContainer: React.FC<{userInfo: UserType}> = ( { userInfo }) => {
     const { image, name, username } = userInfo;
 
-    const dynamicImage = require(`../../assets/user-images/${image}`);
+    const dynamicImage = require(`../../../assets/user-images/${image}`);
 
   return (
     <div className="flex items-center gap-8">

@@ -30,6 +30,7 @@ type ContextVal = {
     setIsAddFeedbackBtnPressed: React.Dispatch<React.SetStateAction<boolean>>;
     setSelectedFeedback: React.Dispatch<React.SetStateAction<ProductRequestsType>>;
     setNewInputList: React.Dispatch<React.SetStateAction<InputListType[]>>;
+    setFeedbackList: React.Dispatch<React.SetStateAction<ProductRequestsType[]>>;
     toggleModal: (modalName: keyof ModalState) => void;
     toggleSidebar: () => void;
     handleClickOnStatusSelector: (text: string) => void;
@@ -46,7 +47,8 @@ type ContextType = {
     children: ReactNode;
 };
 
-const initialFeedback = localStorage.getItem("selectedFeedback")
+const initialFeedback = localStorage.getItem("selectedFeedback");
+const initialFeedbackList = localStorage.getItem("feedbackList");
 
 export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -87,7 +89,7 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
     const [modals, setModals] = useState({filterModal: false, categoryModal: false, statusModal: false});
     const [isLightboxActive, setIsLightboxActive] = useState(false);
     const [sidebarActive, setIsSidebarActive] = useState(false);
-    const [feedbackList, setFeedbackList] = useState(data.productRequests);
+    const [feedbackList, setFeedbackList] = useState<ProductRequestsType[]>(initialFeedbackList ? JSON.parse(initialFeedbackList) : data.productRequests);
     const [isAddFeedbackBtnPressed, setIsAddFeedbackBtnPressed] = useState(false);
     const [suggestions, setSuggestions] = useState<ProductRequestsType[]>(feedbackList.filter(object => object.status === "suggestion"));
     const [selectedFeedback, setSelectedFeedback] = useState<ProductRequestsType>(initialFeedback ? JSON.parse(initialFeedback) : feedbackList[0]);
@@ -126,6 +128,10 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
             localStorage.setItem("selectedFeedback", JSON.stringify(selectedFeedback))
         }
     }, [selectedFeedback]);
+
+    useEffect(() => {
+        localStorage.setItem("feedbackList", JSON.stringify(feedbackList))
+    }, [feedbackList]);
 
     const toggleModal = (modalName: keyof ModalState) => {
         setModals(prev => ({...prev, [modalName]: !prev[modalName]}));
@@ -229,6 +235,7 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         setNewInputList: setNewInputList,
         setCategoryList: setCategoryList,
         setSelectedFeedback: setSelectedFeedback,
+        setFeedbackList: setFeedbackList,
         // functions
         toggleModal: toggleModal,
         toggleSidebar: toggleSidebar,
