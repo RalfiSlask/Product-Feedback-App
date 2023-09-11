@@ -12,7 +12,7 @@ type SectionInfoType = {
     }
 };
 
-const StatusSection: React.FC<SectionInfoType> = ( {sectionInfo} ) => {
+const StatusColumn: React.FC<SectionInfoType> = ( {sectionInfo} ) => {
     const { status, info, color } = sectionInfo;
     const context = useContext(Context);
 
@@ -33,4 +33,4 @@ const StatusSection: React.FC<SectionInfoType> = ( {sectionInfo} ) => {
   )
 }
 
-export default StatusSection
+export default StatusColumn

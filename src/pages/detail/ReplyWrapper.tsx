@@ -1,4 +1,4 @@
-import { RepliesType } from '../../ContextTypes';
+import { RepliesType } from '../../types/ContextTypes';
 import UserContainer from './ui/UserContainer';
 import ReplyButton from './ui/ReplyButton';
 import { useState } from "react";

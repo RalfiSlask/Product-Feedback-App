@@ -1,4 +1,4 @@
-import { CommentsType } from '../../ContextTypes';
+import { CommentsType } from '../../types/ContextTypes';
 import UserContainer from './ui/UserContainer';
 import ReplyWrapper from './ReplyWrapper';
 import ReplyButton from './ui/ReplyButton';

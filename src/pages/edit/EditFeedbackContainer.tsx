@@ -1,6 +1,6 @@
 import Context from "../../context/Context";
 import { useContext } from "react";
-import BigHeading from "../new/BigHeading";
+import BigHeading from "../../components/ui/BigHeading";
 import ButtonComponent from "../../components/ui/ButtonComponent";
 import { useNavigate } from "react-router-dom";
 import Input from "../new/Input";

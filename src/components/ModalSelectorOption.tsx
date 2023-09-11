@@ -1,5 +1,5 @@
 import checkmark from "../assets/shared/icon-check.svg";
-import { ListType } from "../ContextTypes";
+import { ListType } from "../types/ContextTypes";
 
 type PropsType = {
   option: ListType;

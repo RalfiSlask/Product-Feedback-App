@@ -1,4 +1,4 @@
-import { UserType } from "../../../ContextTypes";
+import { UserType } from "../../../types/ContextTypes";
 
 const UserContainer: React.FC<{userInfo: UserType}> = ( { userInfo }) => {
     const { image, name, username } = userInfo;

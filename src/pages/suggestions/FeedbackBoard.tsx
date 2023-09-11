@@ -39,7 +39,7 @@ const FeedbackBoard = () => {
     };
 
   return (
-    <div className={`${sidebarActive ? "fixed z-50" : "static"} flex md:flex-col items-center md:items-start justify-between md:justify-end w-full h-[72px] md:h-[178px] xl:h-[133px] md:w-[13.938rem] md:rounded-[10px] px-6 py-4 md:py-6`} style={{backgroundImage: `url(${image})`, backgroundRepeat: "no-repeat", backgroundPosition: "center", backgroundSize: "cover"}}>
+    <div className={`${sidebarActive ? "fixed z-50" : "static"} flex md:flex-col items-center md:items-start justify-between md:justify-end w-full h-[72px] md:h-[178px] xl:h-[133px] md:w-[223px] md:rounded-[10px] px-6 py-4 md:py-6`} style={{backgroundImage: `url(${image})`, backgroundRepeat: "no-repeat", backgroundPosition: "center", backgroundSize: "cover"}}>
       <div className="flex flex-col leading-normal text-white">
         <h2 className="tracking-[-0.187px] md:tracking-[-0.25px] font-bold text-[0.9375rem] md:text-[1.25rem]">Frontend Mentor</h2>
         <p className="font-medium opacity-75">Feedback Board</p>

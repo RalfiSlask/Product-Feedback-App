@@ -1,5 +1,5 @@
 import NumberOfComments from './ui/NumberOfComments';
-import { CommentsType } from '../../ContextTypes';
+import { CommentsType } from '../../types/ContextTypes';
 import CommentWrapper from './CommentWrapper';
 
 const CommentsContainer: React.FC<{comments: CommentsType[] | undefined}> = ( { comments } ) => {

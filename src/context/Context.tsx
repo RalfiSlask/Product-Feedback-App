@@ -6,7 +6,7 @@ import {
     ModalState,
     InputListType,
     setListType,
-} from "../ContextTypes";
+} from "../types/ContextTypes";
 
 type ContextVal = {
     windowWidth: number;

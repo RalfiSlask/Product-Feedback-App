@@ -1,5 +1,5 @@
 import RoadmapHeader from "./RoadmapHeader";
-import StatusSection from "./StatusSection";
+import StatusColumn from "./StatusColumn";
 import MobileStatusSelector from "./MobileStatusSelector";
 import Context from "../../context/Context";
 import { useContext } from "react";
@@ -28,9 +28,9 @@ const MainRoadmapPage = () => {
       </header>
       <main className="bg-[#F7F8FD] w-full md:w-[689px] xl:w-[1110px] flex flex-col items-center mb-[96px]">
         { windowSize === "mobile" && <MobileStatusSelector selectionArray = {statusSectionsArray}/> }
-        { windowSize === "mobile" ?  <StatusSection sectionInfo={statusSectionsArray[currIndex]} /> :         
+        { windowSize === "mobile" ?  <StatusColumn sectionInfo={statusSectionsArray[currIndex]} /> :         
         <div className="flex justify-between w-full">
-          {statusSectionsArray.map(section => <StatusSection key={section.id} sectionInfo={section}/>)}
+          {statusSectionsArray.map(section => <StatusColumn key={section.id} sectionInfo={section}/>)}
         </div>}
       </main>
     </div>

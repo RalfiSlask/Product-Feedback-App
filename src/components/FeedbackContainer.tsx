@@ -1,5 +1,5 @@
 import HeadingMedium from "./ui/HeadingMedium";
-import { ProductRequestsType } from "../ContextTypes";
+import { ProductRequestsType } from "../types/ContextTypes";
 import CommentNumberContainer from "./ui/CommentNumberContainer";
 import UpvoteContainer from "./UpvoteContainer";
 import CategoryWrapperNotClickable from "./ui/CategoryWrapperNotClickable";

@@ -1,5 +1,5 @@
 import commentLogo from "../../assets/shared/icon-comments.svg";
-import { CommentsType } from "../../ContextTypes";
+import { CommentsType } from "../../types/ContextTypes";
 
 const CommentNumberContainer: React.FC<{comments: CommentsType[] | undefined, suggestion?: boolean}> = ( {comments, suggestion} ) => {
 
