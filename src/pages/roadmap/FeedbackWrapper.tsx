@@ -6,6 +6,7 @@ import CategoryWrapperNotClickable from "../../components/ui/CategoryWrapperNotC
 import { useNavigate } from "react-router-dom";
 import Context from "../../context/Context";
 import { useContext } from "react";
+import { getTextWithFirstUppercaseLetter } from "../../utils/HelperFunctions";
 
 type PropsType = {
     statusInfo: ProductRequestsType;
@@ -20,7 +21,7 @@ const FeedbackWrapper: React.FC<PropsType> = ( {statusInfo, color} ) => {
   };
   
   const { id, status, title, category, description, upvotes, comments } = statusInfo;
-  const statusUppercase = status === "in-progress" ? "In Progress" : status.substring(0, 1).toLocaleUpperCase() + status.substring(1, status.length);
+  const statusUppercase = status === "in-progress" ? "In Progress" : getTextWithFirstUppercaseLetter(status);
   const { setSelectedFeedback } = context;
   const navigate = useNavigate();
 

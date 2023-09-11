@@ -7,13 +7,12 @@ import {
     InputListType,
     setListType,
 } from "../types/ContextTypes";
+import { getInputByLabel } from "../utils/HelperFunctions";
 
 type ContextVal = {
     windowWidth: number;
     windowSize: string;
     selectedStatus: string;
-    isLightboxActive: boolean;
-    sidebarActive: boolean;
     isAddFeedbackBtnPressed: boolean;
     modals: ModalState;
     filterList: ListType[];
@@ -23,22 +22,26 @@ type ContextVal = {
     categoryOptionList: ListType[];
     statusList: ListType[];
     newInputList: InputListType[];
+    editInputList: InputListType[];
     selectedFeedback: ProductRequestsType;
     setFilterList: setListType;
     setCategoryOptionList: setListType;
     setCategoryList: setListType;
+    setStatusList: setListType;
     setIsAddFeedbackBtnPressed: React.Dispatch<React.SetStateAction<boolean>>;
     setSelectedFeedback: React.Dispatch<React.SetStateAction<ProductRequestsType>>;
     setNewInputList: React.Dispatch<React.SetStateAction<InputListType[]>>;
     setFeedbackList: React.Dispatch<React.SetStateAction<ProductRequestsType[]>>;
+    setEditInputList: React.Dispatch<React.SetStateAction<InputListType[]>>;
     toggleModal: (modalName: keyof ModalState) => void;
-    toggleSidebar: () => void;
+    closeModal: (modalName: string) => void;
+    openModal: (modalName: string) => void;
     handleClickOnStatusSelector: (text: string) => void;
     updateNewInputList: (id: number, input: string, status: boolean) => void;
     selectOptionFromItemsOnClick: (text: string, List: ListType[], setList: setListType, modalName?: string) => void;
-    closeModal: (modalName: string) => void;
     filterSuggestionsByCategory: (text: string) => void;
     sortSuggestionsBySelectedOption: (text: string) => void;
+    createNewFeedbackAndAddToList: () => void;
 };
 
 const Context = createContext<ContextVal | undefined>(undefined);
@@ -53,12 +56,33 @@ const initialFeedbackList = localStorage.getItem("feedbackList");
 export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [windowSize, setWindowSize] = useState("");
+
+    // Modal Lists
+
     const [filterList, setFilterList] = useState([
         {id: 1, text: "Most Upvotes", selected: true},
         {id: 2, text: "Least Upvotes", selected: false},
         {id: 3, text: "Most Comments", selected: false},
         {id: 4, text: "Least Comments", selected: false}
     ]);
+
+    const [categoryOptionList, setCategoryOptionList] = useState([
+        {id: 1, text: "UI", selected: false},
+        {id: 2, text: "UX", selected: false},
+        {id: 3, text: "Enhancement", selected: false},
+        {id: 4, text: "Bug", selected: false},
+        {id: 5, text: "Feature", selected: true},
+    ]);
+
+    const [statusList, setStatusList] = useState([
+        {id: 1, text: "Suggestion", selected: false},
+        {id: 2, text: "Planned", selected: false},
+        {id: 3, text: "In-Progress", selected: false},
+        {id: 4, text: "Live", selected: false},
+    ]);
+
+    //  Category Filter List
+
     const [categoryList, setCategoryList] = useState([
         {id: 1, text: "All", selected: true},
         {id: 2, text: "UI", selected: false},
@@ -67,28 +91,22 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         {id: 5, text: "Bug", selected: false},
         {id: 6, text: "Feature", selected: false},
     ]);
-    const [categoryOptionList, setCategoryOptionList] = useState([
-        {id: 1, text: "UI", selected: false},
-        {id: 2, text: "UX", selected: false},
-        {id: 3, text: "Enhancement", selected: false},
-        {id: 4, text: "Bug", selected: false},
-        {id: 5, text: "Feature", selected: true},
-    ]);
-    const [statusList, setStatusList] = useState([
-        {id: 1, text: "Suggestion", selected: false},
-        {id: 2, text: "Planned", selected: false},
-        {id: 3, text: "In-Progress", selected: false},
-        {id: 4, text: "Live", selected: false},
-    ]);
+    
+    // Input Lists (New / Edit)
+
     const [newInputList, setNewInputList] = useState<InputListType[]>([
         {id: 1, label: "title", input: "", interacted: false},
         {id: 2, label: "category", input: "Feature", interacted: true},
         {id: 3, label: "description", input: "", interacted: false},
     ]);
+    const [editInputList, setEditInputList] = useState<InputListType[]>([
+        {id: 1, label: "title", input: "", interacted: false},
+        {id: 2, label: "category", input: "Feature", interacted: true},
+        {id: 3, label: "status", input: "", interacted: true},
+        {id: 4, label: "description", input: "", interacted: false}
+    ]);
     const [selectedStatus, setSelectedStatus] = useState("In-Progress");
-    const [modals, setModals] = useState({filterModal: false, categoryModal: false, statusModal: false});
-    const [isLightboxActive, setIsLightboxActive] = useState(false);
-    const [sidebarActive, setIsSidebarActive] = useState(false);
+    const [modals, setModals] = useState({filterModal: false, categoryModal: false, statusModal: false, sidebar: false, deleteModal: false});
     const [feedbackList, setFeedbackList] = useState<ProductRequestsType[]>(initialFeedbackList ? JSON.parse(initialFeedbackList) : data.productRequests);
     const [isAddFeedbackBtnPressed, setIsAddFeedbackBtnPressed] = useState(false);
     const [suggestions, setSuggestions] = useState<ProductRequestsType[]>(feedbackList.filter(object => object.status === "suggestion"));
@@ -97,13 +115,13 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth)
-        }
+        };
 
         window.addEventListener("resize", handleResize)
 
         return () => {
             window.removeEventListener("resize", handleResize)
-        }
+        };
     }, []);
 
     useEffect(() => {
@@ -118,8 +136,7 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
 
     useEffect(() => {
         if(windowSize !== "mobile") {
-            setIsLightboxActive(false)
-            setIsSidebarActive(false)
+            setModals(prev => ({...prev, sidebar: false}))
         }
     }, [windowSize]);
 
@@ -130,16 +147,20 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
     }, [selectedFeedback]);
 
     useEffect(() => {
-        localStorage.setItem("feedbackList", JSON.stringify(feedbackList))
+        localStorage.setItem("feedbackList", JSON.stringify(feedbackList));
+        setSuggestions(feedbackList.filter(object => object.status === "suggestion"));
     }, [feedbackList]);
 
     const toggleModal = (modalName: keyof ModalState) => {
         setModals(prev => ({...prev, [modalName]: !prev[modalName]}));
     };
 
-    const toggleSidebar = () => {
-        setIsLightboxActive(PrevState => !PrevState)
-        setIsSidebarActive(PrevState => !PrevState)
+    const closeModal = (modalName: string) => {
+        setModals(prev => ({...prev, [modalName]: false}))
+    };
+
+    const openModal = (modalName: string) => {
+        setModals(prev => ({...prev, [modalName]: true}))
     };
 
     const handleClickOnStatusSelector = (text: string) => {
@@ -152,10 +173,6 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         setList(newList);
     };
 
-    const closeModal = (modalName: string) => {
-        setModals(prev => ({...prev, [modalName]: false}))
-    };
-
     const updateNewInputList = (id: number, input: string | undefined, status: boolean) => {
         const updatedList = [...newInputList]
         const updatedInput = updatedList.find(object => object.id === id)
@@ -166,11 +183,11 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
     };
 
     const filterSuggestionsByCategory = (text: string) => {
+        const suggestionList = feedbackList.filter(object => object.status === "suggestion");
         if(text === "All") {
-            setSuggestions(feedbackList.filter(object => object.status === "suggestion"))
+            setSuggestions(suggestionList)
         } else {
-            const suggestionList = feedbackList.filter(object => object.status === "suggestion")
-            setSuggestions(suggestionList.filter(object => object.category === text.toLowerCase()))
+            setSuggestions(suggestionList.filter(object => object.category.toLowerCase() === text.toLowerCase()))
         }
     };
 
@@ -196,17 +213,17 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         setSuggestions(suggestionList)
     };
 
-    const createNewFeedbackObject = () => {
-        const inputsArray = newInputList.map(object => object.input)
-        const obj = {...inputsArray}
-
+    const createNewFeedbackAndAddToList = () => {
+        const titleInput = getInputByLabel("title", newInputList);
+        const categoryInput = getInputByLabel("category", newInputList);
+        const descriptionInput = getInputByLabel("description", newInputList);
         const newObject = {
             id: feedbackList.length + 1,
-            title: inputsArray[0] ? inputsArray[0] : "",
-            category: "",
+            title: titleInput,
+            category: categoryInput,
             upvotes: 0,
             status: "suggestion",
-            description: "",
+            description: descriptionInput,
         }
         setFeedbackList(prev => [...prev, newObject])
     };
@@ -224,10 +241,9 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         statusList: statusList,
         isAddFeedbackBtnPressed: isAddFeedbackBtnPressed,
         newInputList: newInputList,
-        isLightboxActive: isLightboxActive,
-        sidebarActive: sidebarActive,
         suggestions: suggestions,
         selectedFeedback: selectedFeedback,
+        editInputList: editInputList,
         // setters
         setFilterList: setFilterList,
         setCategoryOptionList: setCategoryOptionList,
@@ -236,15 +252,18 @@ export const ContextProvider: React.FC<ContextType> = ( {children} ) => {
         setCategoryList: setCategoryList,
         setSelectedFeedback: setSelectedFeedback,
         setFeedbackList: setFeedbackList,
+        setStatusList: setStatusList,
+        setEditInputList: setEditInputList,
         // functions
         toggleModal: toggleModal,
-        toggleSidebar: toggleSidebar,
+        closeModal: closeModal,
+        openModal: openModal,
         handleClickOnStatusSelector: handleClickOnStatusSelector,
         updateNewInputList: updateNewInputList,
         selectOptionFromItemsOnClick: selectOptionFromItemsOnClick,
-        closeModal: closeModal,
         filterSuggestionsByCategory: filterSuggestionsByCategory,
         sortSuggestionsBySelectedOption: sortSuggestionsBySelectedOption,
+        createNewFeedbackAndAddToList: createNewFeedbackAndAddToList,
     };
 
     return (

@@ -5,10 +5,10 @@ import Context from "../../context/Context";
 import FeedbackContainer from "../../components/FeedbackContainer";
 import RoadmapContainer from "./RoadmapContainer";
 import CategoryContainer from "./ui/CategoryContainer";
-import Lightbox from "../../components/ui/Lightbox";
+import BlackLightbox from "../../components/ui/BlackLightbox";
 import Sidebar from "./ui/Sidebar";
 import WhiteLightbox from "../../components/ui/WhiteLightbox";
-import ThereIsNoFeedbackContainer from "./ThereIsNoFeedbackContainer";
+import ThereIsNoFeedbackContainer from "./ui/ThereIsNoFeedbackContainer";
 import { useNavigate } from "react-router-dom";
 import { ProductRequestsType } from "../../types/ContextTypes";
 
@@ -26,7 +26,7 @@ const MainSuggestionsPage = () => {
     setSelectedFeedback(suggestion)
   };
 
-  const { windowSize, isLightboxActive, suggestions, modals, setSelectedFeedback } = context;
+  const { windowSize, suggestions, modals, setSelectedFeedback } = context;
 
   return (
     <>
@@ -46,7 +46,7 @@ const MainSuggestionsPage = () => {
           <ThereIsNoFeedbackContainer />}
         </section>
       </main>
-      {isLightboxActive && <Lightbox />}
+      {modals.sidebar && <BlackLightbox marginTop={"72px"}/>}
       <Sidebar />
     </div>
     </>

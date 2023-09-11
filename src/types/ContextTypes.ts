@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type ListType = {
     id: number;
     text: string;
@@ -20,6 +22,17 @@ export type ProductRequestsType = {
     comments?: CommentsType[];
 };
 
+export type EditSelectorInputType = {
+    id: number;
+    modal: ReactNode;
+    type: string;
+};
+
+export type NewSelectorInputType = {
+    id: number;
+    modal: ReactNode;
+};
+
 export type setListType = React.Dispatch<React.SetStateAction<ListType[]>>
 
 export type RepliesType = {content: string, replyingTo: string, user: UserType};
@@ -32,7 +45,11 @@ export type CommentsType = {
 };
 
 export type ModalState = {
-    filterModal: boolean, categoryModal: boolean, statusModal: boolean
+    filterModal: boolean, 
+    categoryModal: boolean, 
+    statusModal: boolean,
+    sidebar: boolean,
+    deleteModal: boolean,
 };
 
 export type InputListType = {

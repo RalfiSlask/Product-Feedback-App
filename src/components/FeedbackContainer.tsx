@@ -14,7 +14,9 @@ const FeedbackContainer: React.FC<PropsType> = ( { feedback, onClick } ) => {
   const { id, title, category, comments, description, upvotes } = feedback;
 
   const handleClick = () => {
-    onClick ? onClick(feedback) : undefined;
+    if(onClick) {
+      onClick(feedback)
+    }
   };
 
   return (

@@ -15,7 +15,7 @@ const SortingPanel = () => {
 
   const navigate = useNavigate();
 
-  const { modals, windowSize, suggestions, sidebarActive } = context;
+  const { modals, windowSize, suggestions } = context;
 
   const suggestionCount = suggestions.length;
 
@@ -24,7 +24,7 @@ const SortingPanel = () => {
   };
 
   return (
-    <div className={`${sidebarActive ? "mt-[72px]" : "mt-0"} bg-[#373F68] relative w-full md:rounded-[10px] h-14 md:h-[72px] flex items-center justify-between px-6 text-[#F2F4FE] `}>
+    <div className={`${modals.sidebar ? "mt-[72px]" : "mt-0"} bg-[#373F68] relative w-full md:rounded-[10px] h-14 md:h-[72px] flex items-center justify-between px-6 text-[#F2F4FE] `}>
       <div className='flex gap-[38px]'>
         {windowSize !== "mobile" ? <SuggestionCount count={suggestionCount}/> : null}
         <SortSelector />

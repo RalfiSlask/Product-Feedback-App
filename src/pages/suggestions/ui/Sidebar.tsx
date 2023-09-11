@@ -10,10 +10,10 @@ const Sidebar = () => {
     throw new Error("Does not exist in provider");
   }
 
-  const { sidebarActive } = context;
+  const { modals } = context;
 
   return (
-    <div className={`${sidebarActive ? "translate-x-0" : "translate-x-[279px]"} w-[279px] duration-500 h-full fixed z-50 flex flex-col gap-6 p-6 right-0 bg-[#F7F8FD] top-[72px]`}>
+    <div className={`${modals.sidebar ? "translate-x-0" : "translate-x-[279px]"} w-[279px] duration-500 h-full fixed z-50 flex flex-col gap-6 p-6 right-0 bg-[#F7F8FD] top-[72px]`}>
       <CategoryContainer />
       <RoadmapContainer />
     </div>

@@ -1,15 +1,15 @@
 import { useState, useContext, useEffect } from "react";
 import { ReactComponent as ArrowDown } from "../../assets/shared/icon-arrow-down.svg";
 import { ReactComponent as ArrowUp } from "../../assets/shared/icon-arrow-up.svg";
-import CategoryModal from "./CategoryModal";
 import Context from "../../context/Context";
+import { NewSelectorInputType } from "../../types/ContextTypes";
 
-const CategoryInput: React.FC<{id: number}> = ({id}) => {
+const CategoryInput: React.FC<NewSelectorInputType> = ({id, modal}) => {
   const context = useContext(Context);
 
   if(!context) {
       throw new Error("Does not exist in provider")
-  }
+  };
 
   const { categoryOptionList, updateNewInputList } = context;
 
@@ -33,7 +33,7 @@ const CategoryInput: React.FC<{id: number}> = ({id}) => {
         <p>{selectedCategory}</p>
         {isClicked ? <ArrowUp className="stroke-[#4661E6]"/> : <ArrowDown className="stroke-[#4661E6]"/>}
       </div>
-      {isClicked && <CategoryModal />}
+      {isClicked && modal}
     </div>
   )
 }

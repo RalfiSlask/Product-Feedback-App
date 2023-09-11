@@ -2,21 +2,23 @@ import ButtonComponent from "../../components/ui/ButtonComponent";
 import BigHeading from "../../components/ui/BigHeading";
 import { useNavigate } from "react-router-dom";
 import Input from "./Input";
-import CategoryInput from "./CategoryInput";
 import TextareaInput from "./TextareaInput";
 import FormLabelAndInfo from "./FormLabelAndInfo";
 import Context from "../../context/Context";
 import { useContext, useEffect } from "react";
+import CategoryModal from "./CategoryModal";
+import CategoryInput from "./CategoryInput";
 
 const NewFeedbackContainer = () => {
   const context = useContext(Context);
+  const navigate = useNavigate();
 
   if(!context) {
       throw new Error("Does not exist in provider")
   };
 
-  const { setIsAddFeedbackBtnPressed, newInputList, setNewInputList } = context;
-
+  const { setIsAddFeedbackBtnPressed, newInputList, setNewInputList, createNewFeedbackAndAddToList } = context;
+ 
   useEffect(() => {
     setNewInputList([
     {id: 1, label: "title", input: "", interacted: false},
@@ -25,23 +27,22 @@ const NewFeedbackContainer = () => {
     ])
   }, []);
 
+  const newFeedbackArray = [
+    {id: 1, label: "Feedback Title", description: "Add a short, descriptive headline", input: <Input id={1} />, error: "Can’t be empty"},
+    {id: 2, label: "Category", description: "Choose a category for your feedback", input: <CategoryInput id={2} modal={<CategoryModal />}/>},
+    {id: 3, label: "Feedback Detail", description: "Include any specific comments on what should be improved, added, etc.", input: <TextareaInput id={3} errorText={"Can’t be empty"}/>},
+  ];
+
   const clickOnAddFeedback = () => {
     const allInputsNotEmpty = newInputList.every((object => object.input !== ""))
     if(allInputsNotEmpty) {
+      createNewFeedbackAndAddToList();
       navigate("/")
       setIsAddFeedbackBtnPressed(false)
     } else {
       setIsAddFeedbackBtnPressed(true)
     }
   };
-  
-  const newFeedbackArray = [
-    {id: 1, label: "Feedback Title", description: "Add a short, descriptive headline", input: <Input id={1} />, error: "Can’t be empty"},
-    {id: 2, label: "Category", description: "Choose a category for your feedback", input: <CategoryInput id={2}/>},
-    {id: 3, label: "Feedback Detail", description: "Include any specific comments on what should be improved, added, etc.", input: <TextareaInput id={3} errorText={"Can’t be empty"}/>},
-  ];
-
-  const navigate = useNavigate();
 
   const handleClickOnCancel = () => {
     navigate(-1)
