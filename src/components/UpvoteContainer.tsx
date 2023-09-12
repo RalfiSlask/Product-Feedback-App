@@ -1,10 +1,10 @@
 import { ReactComponent as ArrowUp } from "../assets/shared/icon-arrow-up.svg";
 import { useState } from "react";
-import Context from "../context/Context";
+import FeedbackContext from "../context/FeedbackContext";
 import { useContext } from "react";
 
 const UpvoteContainer: React.FC<{id: number, upvotes: number, suggestion?: boolean}> = ( { id, upvotes, suggestion }) => {
-  const context = useContext(Context);
+  const context = useContext(FeedbackContext);
   
   if(!context) {
     throw new Error("Does not exist in provider");

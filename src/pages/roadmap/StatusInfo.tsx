@@ -1,8 +1,8 @@
-import Context from "../../context/Context";
+import FeedbackContext from "../../context/FeedbackContext";
 import { useContext } from "react";
 
 const StatusInfo: React.FC<{status: string, info: string}> = ( { status, info } ) => {
-    const context = useContext(Context);
+    const context = useContext(FeedbackContext);
 
     if(!context) {
         throw new Error("Does not exist in Provider")

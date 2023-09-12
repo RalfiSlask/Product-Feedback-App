@@ -1,5 +1,5 @@
 import StatusInfo from "./StatusInfo";
-import Context from "../../context/Context";
+import FeedbackContext from "../../context/FeedbackContext";
 import { useContext } from "react";
 import FeedbackWrapper from "./FeedbackWrapper";
 
@@ -14,7 +14,7 @@ type SectionInfoType = {
 
 const StatusColumn: React.FC<SectionInfoType> = ( {sectionInfo} ) => {
     const { status, info, color } = sectionInfo;
-    const context = useContext(Context);
+    const context = useContext(FeedbackContext);
 
     if(!context) {
         throw new Error("Does not exist in Provider")

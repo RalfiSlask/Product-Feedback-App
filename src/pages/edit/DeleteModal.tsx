@@ -1,17 +1,20 @@
 import ButtonComponent from "../../components/ui/ButtonComponent";
-import Context from "../../context/Context";
+import FeedbackContext from "../../context/FeedbackContext";
+import UIContext from "../../context/UIContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 const DeleteModal = () => {
-  const context = useContext(Context);
-  const navigate = useNavigate();
-
-  if(!context) {
+  const uiContext = useContext(UIContext);
+  const feedbackContext = useContext(FeedbackContext)
+  
+  if(!uiContext || !feedbackContext) {
       throw new Error("Does not exist in provider")
   };
 
-  const { feedbackList , setFeedbackList, selectedFeedback, closeModal } = context;
+  const { closeModal } = uiContext;
+  const { feedbackList , setFeedbackList, selectedFeedback } = feedbackContext;
+  const navigate = useNavigate();
 
   const handleClickOnYes = () => {
     const filteredFeedbackList = feedbackList.filter(feedback => feedback.id !== selectedFeedback.id);

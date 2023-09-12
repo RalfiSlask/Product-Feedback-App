@@ -1,6 +1,6 @@
 import ButtonComponent from '../../components/ui/ButtonComponent';
 import { useState, ChangeEvent, useContext } from "react";
-import Context from '../../context/Context';
+import Context from '../../context/FeedbackContext';
 import data from "../../data/data.json";
 
 const AddCommentContainer = ( ) => {

@@ -4,7 +4,7 @@ import UpvoteContainer from "../../components/UpvoteContainer";
 import CommentNumberContainer from "../../components/ui/CommentNumberContainer";
 import CategoryWrapperNotClickable from "../../components/ui/CategoryWrapperNotClickable";
 import { useNavigate } from "react-router-dom";
-import Context from "../../context/Context";
+import FeedbackContext from "../../context/FeedbackContext";
 import { useContext } from "react";
 import { getTextWithFirstUppercaseLetter } from "../../utils/HelperFunctions";
 
@@ -14,7 +14,7 @@ type PropsType = {
 };
 
 const FeedbackWrapper: React.FC<PropsType> = ( {statusInfo, color} ) => {
-  const context = useContext(Context);
+  const context = useContext(FeedbackContext);
   
   if(!context) {
     throw new Error("Does not exist in provider");

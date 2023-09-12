@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import Context from "../../context/Context";
+import UIContext from "../../context/UIContext";
 import bgMobile from "../../assets/suggestions/mobile/background-header.png";
 import bgTablet from "../../assets/suggestions/tablet/background-header.png";
 import bgDesktop from "../../assets/suggestions/desktop/background-header.png";
@@ -7,7 +7,7 @@ import logoHamburger from "../../assets/shared/mobile/icon-hamburger.svg";
 import logoClose from "../../assets/shared/mobile/icon-close.svg";
 
 const FeedbackBoard = () => {
-    const context = useContext(Context);
+    const context = useContext(UIContext);
     const [image, setImage] = useState<string>();
     const [logo, setLogo] = useState<string>(logoHamburger);
 

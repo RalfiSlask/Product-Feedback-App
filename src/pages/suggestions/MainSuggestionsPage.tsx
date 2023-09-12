@@ -1,7 +1,7 @@
 import FeedbackBoard from "./FeedbackBoard";
 import SortingPanel from "./SortingPanel";
 import { useContext } from "react";
-import Context from "../../context/Context";
+import FeedbackContext from "../../context/FeedbackContext";
 import FeedbackContainer from "../../components/FeedbackContainer";
 import RoadmapContainer from "./RoadmapContainer";
 import CategoryContainer from "./ui/CategoryContainer";
@@ -11,12 +11,14 @@ import WhiteLightbox from "../../components/ui/WhiteLightbox";
 import ThereIsNoFeedbackContainer from "./ui/ThereIsNoFeedbackContainer";
 import { useNavigate } from "react-router-dom";
 import { ProductRequestsType } from "../../types/ContextTypes";
+import UIContext from "../../context/UIContext";
 
 const MainSuggestionsPage = () => {
-  const context = useContext(Context);
-  
-  if(!context) {
-    throw new Error("Does not exist in provider");
+  const feedbackContext = useContext(FeedbackContext);
+  const uiContext = useContext(UIContext)
+
+  if(!feedbackContext || !uiContext) {
+      throw new Error("Does not exist in provider")
   };
 
   const navigate = useNavigate();
@@ -26,7 +28,8 @@ const MainSuggestionsPage = () => {
     setSelectedFeedback(suggestion)
   };
 
-  const { windowSize, suggestions, modals, setSelectedFeedback } = context;
+  const { windowSize, modals } = uiContext;
+  const { suggestions, setSelectedFeedback } = feedbackContext;
 
   return (
     <>

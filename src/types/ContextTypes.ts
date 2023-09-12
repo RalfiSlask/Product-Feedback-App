@@ -22,18 +22,17 @@ export type ProductRequestsType = {
     comments?: CommentsType[];
 };
 
-export type EditSelectorInputType = {
+export type SelectorInputType = {
     id: number;
     modal: ReactNode;
-    type: string;
-};
-
-export type NewSelectorInputType = {
-    id: number;
-    modal: ReactNode;
+    modalList: ListType[];
+    inputList: InputListType[];
+    setInputList: setInputListType;
 };
 
 export type setListType = React.Dispatch<React.SetStateAction<ListType[]>>
+
+export type setInputListType = React.Dispatch<React.SetStateAction<InputListType[]>>
 
 export type RepliesType = {content: string, replyingTo: string, user: UserType};
 

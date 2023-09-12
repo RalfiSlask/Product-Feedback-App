@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Context from "../../context/Context";
+import FeedbackContext from "../../context/FeedbackContext";
 
 type PropsType = {
     id: number;
@@ -9,7 +9,7 @@ type PropsType = {
 };
 
 const FormLabelAndInfo: React.FC<PropsType> = ( {id, title, description, errorText} ) => {
-  const context = useContext(Context);
+  const context = useContext(FeedbackContext);
 
   if(!context) {
       throw new Error("Does not exist in provider")

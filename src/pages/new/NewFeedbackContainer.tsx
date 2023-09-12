@@ -1,16 +1,16 @@
 import ButtonComponent from "../../components/ui/ButtonComponent";
 import BigHeading from "../../components/ui/BigHeading";
 import { useNavigate } from "react-router-dom";
-import Input from "./Input";
-import TextareaInput from "./TextareaInput";
+import Input from "../../components/Input";
+import TextareaInput from "../../components/TextareaInput";
 import FormLabelAndInfo from "./FormLabelAndInfo";
-import Context from "../../context/Context";
-import { useContext, useEffect } from "react";
-import CategoryModal from "./CategoryModal";
-import CategoryInput from "./CategoryInput";
+import FeedbackContext from "../../context/FeedbackContext";
+import { useContext, useEffect, useState } from "react";
+import SelectorModal from "./SelectorModal";
+import SelectorInput from "../../components/SelectorInput";
 
 const NewFeedbackContainer = () => {
-  const context = useContext(Context);
+  const context = useContext(FeedbackContext);
   const navigate = useNavigate();
 
   if(!context) {
@@ -27,10 +27,42 @@ const NewFeedbackContainer = () => {
     ])
   }, []);
 
+  const [categoryList, setCategoryList] = useState([
+    {id: 1, text: "UI", selected: false},
+    {id: 2, text: "UX", selected: false},
+    {id: 3, text: "Enhancement", selected: false},
+    {id: 4, text: "Bug", selected: false},
+    {id: 5, text: "Feature", selected: true},
+  ]);
+
   const newFeedbackArray = [
-    {id: 1, label: "Feedback Title", description: "Add a short, descriptive headline", input: <Input id={1} />, error: "Can’t be empty"},
-    {id: 2, label: "Category", description: "Choose a category for your feedback", input: <CategoryInput id={2} modal={<CategoryModal />}/>},
-    {id: 3, label: "Feedback Detail", description: "Include any specific comments on what should be improved, added, etc.", input: <TextareaInput id={3} errorText={"Can’t be empty"}/>},
+    { id: 1, label: "Feedback Title", description: "Add a short, descriptive headline", error: "Can’t be empty",
+      input: 
+      <Input 
+        id={1} 
+        inputList={newInputList} 
+        setInputList={setNewInputList}
+      />,
+    },
+    { id: 2, label: "Category", description: "Choose a category for your feedback", 
+      input: 
+      <SelectorInput 
+        id={2} 
+        modalList={categoryList} 
+        inputList={newInputList} 
+        setInputList={setNewInputList} 
+        modal={<SelectorModal optionList={categoryList} setOptionList={setCategoryList}/>}
+      />
+    },
+    { id: 3, label: "Feedback Detail", description: "Include any specific comments on what should be improved, added, etc.", 
+      input: 
+      <TextareaInput 
+        id={3} 
+        errorText={"Can’t be empty"} 
+        inputList={newInputList} 
+        setInputList={setNewInputList}
+      />
+    },
   ];
 
   const clickOnAddFeedback = () => {

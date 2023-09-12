@@ -1,8 +1,8 @@
 import RoadmapHeader from "./RoadmapHeader";
 import StatusColumn from "./StatusColumn";
 import MobileStatusSelector from "./MobileStatusSelector";
-import Context from "../../context/Context";
 import { useContext } from "react";
+import UIContext from "../../context/UIContext";
 
 const statusSectionsArray = [
   {id: 1, status: "Planned", info: "Ideas prioritized for research", color: "#F49F85"},
@@ -11,13 +11,14 @@ const statusSectionsArray = [
 ]
 
 const MainRoadmapPage = () => {
-  const context = useContext(Context);
+  const uiContext = useContext(UIContext)
 
-  if(!context) {
-      throw new Error("Does not exist in Provider")
+  if(!uiContext) {
+      throw new Error("Does not exist in provider")
   };
 
-  const { windowSize, selectedStatus } = context;
+  const { windowSize, selectedStatus } = uiContext;
+
 
   const currIndex = statusSectionsArray.findIndex(element => element.status === selectedStatus)
 

@@ -1,4 +1,4 @@
-import Context from "../../context/Context";
+import FeedbackContext from "../../context/FeedbackContext";
 import { useContext } from "react";
 import StatusPanelWithColoredDot from "../../components/ui/StatusPanelWithColoredDot";
 
@@ -13,7 +13,7 @@ type StatusPropsType = {
 const StatusContainer: React.FC<StatusPropsType> = ( {status} ) => {
   const { type, color } = status;
   
-  const context = useContext(Context);
+  const context = useContext(FeedbackContext);
 
   if(!context) {
     throw new Error("Does not exist in Provider")

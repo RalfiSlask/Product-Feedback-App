@@ -1,10 +1,10 @@
-import Context from "../../../context/Context";
+import UIContext from "../../../context/UIContext";
 import { useContext } from "react";
 import RoadmapContainer from "../RoadmapContainer";
 import CategoryContainer from "./CategoryContainer";
 
 const Sidebar = () => {
-  const context = useContext(Context);
+  const context = useContext(UIContext);
   
   if(!context) {
     throw new Error("Does not exist in provider");

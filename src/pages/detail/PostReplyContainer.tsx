@@ -1,6 +1,6 @@
 import PostReplyInput from './PostReplyInput';
 import ButtonComponent from '../../components/ui/ButtonComponent';
-import Context from '../../context/Context';
+import Context from '../../context/FeedbackContext';
 import { useContext, useState, ChangeEvent } from 'react';
 import data from "../../data/data.json";
 

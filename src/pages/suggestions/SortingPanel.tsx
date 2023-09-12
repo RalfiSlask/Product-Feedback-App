@@ -3,19 +3,22 @@ import SuggestionCount from './ui/SuggestionCount';
 import ButtonComponent from '../../components/ui/ButtonComponent';
 import SuggestionModal from './SuggestionModal';
 import { useContext } from "react";
-import Context from "../../context/Context";
+import FeedbackContext from "../../context/FeedbackContext";
 import { useNavigate } from 'react-router-dom';
+import UIContext from '../../context/UIContext';
 
 const SortingPanel = () => {
-  const context = useContext(Context);
+  const feedbackContext = useContext(FeedbackContext);
+  const uiContext = useContext(UIContext)
 
-  if(!context) {
+  if(!feedbackContext || !uiContext) {
       throw new Error("Does not exist in provider")
   };
 
   const navigate = useNavigate();
 
-  const { modals, windowSize, suggestions } = context;
+  const { modals, windowSize } = uiContext;
+  const { suggestions } = feedbackContext;
 
   const suggestionCount = suggestions.length;
 

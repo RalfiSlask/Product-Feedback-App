@@ -8,3 +8,12 @@ export const getInputByLabel = (label: string, list: InputListType[]) => {
 export const getTextWithFirstUppercaseLetter = (text: string) => {
     return text.substring(0, 1).toUpperCase() + text.substring(1, text.length)
 };
+
+export const getInputByTypeFromList = (inputList: InputListType[], type: string) => {
+    const selectedOption = inputList.find(object => object.label === type)?.input;
+    if(selectedOption) {
+      return selectedOption;
+    } else {
+      return "does not exist"
+    }
+  };

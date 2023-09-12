@@ -1,5 +1,6 @@
-import Context from "../../context/Context"
-import { useContext } from "react"
+import FeedbackContext from "../../context/FeedbackContext";
+import UIContext from "../../context/UIContext";
+import { useContext } from "react";
 
 type PropsType = {
   status: string;
@@ -7,13 +8,15 @@ type PropsType = {
 }
 
 const Selector: React.FC<PropsType>  = ( { status, color } ) => {
-  const context = useContext(Context);
+  const feedbackContext = useContext(FeedbackContext);
+  const uiContext = useContext(UIContext);
 
-  if(!context) {
+  if(!uiContext || !feedbackContext) {
       throw new Error("Does not exist in Provider")
   };
 
-  const { handleClickOnStatusSelector, selectedStatus, feedbackList } = context;
+  const { selectedStatus, handleClickOnStatusSelector } = uiContext;
+  const { feedbackList } = feedbackContext;
 
   const numberOfFeedbacks = feedbackList.filter(object => object.status === status.toLowerCase()).length;
 

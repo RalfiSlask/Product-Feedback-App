@@ -1,9 +1,9 @@
 import CategoryWrapper from "../CategoryWrapper";
-import Context from "../../../context/Context";
+import FeedbackContext from "../../../context/FeedbackContext";
 import { useContext } from "react";
 
 const CategoryContainer = ( ) => {
-  const context = useContext(Context);
+  const context = useContext(FeedbackContext);
   
   if(!context) {
     throw new Error("Does not exist in provider");

@@ -1,18 +1,18 @@
 import GoBack from "../../components/GoBack";
 import EditFeedbackContainer from "./EditFeedbackContainer";
 import BlackLightbox from "../../components/ui/BlackLightbox";
-import Context from "../../context/Context";
+import UIContext from "../../context/UIContext";
 import { useContext } from "react";
 import DeleteModal from "./DeleteModal";
 
 const MainEditPage = () => {
-  const context = useContext(Context);
+  const uiContext = useContext(UIContext);
 
-  if(!context) {
+  if(!uiContext) {
       throw new Error("Does not exist in provider")
   };
 
-  const { modals } = context;
+  const { modals } = uiContext;
 
   return (
     <div className="w-full flex justify-center">
