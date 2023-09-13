@@ -54,7 +54,6 @@ const EditFeedbackContainer = () => {
     updateInputOnStart(statusList, "status", setStatusList);
   }, []);
 
-
   const editFeedbackArray = [
       { id: 1, label: "Feedback Title", description: "Add a short, descriptive headline", error: "Can’t be empty",
         input: 
@@ -110,7 +109,7 @@ const EditFeedbackContainer = () => {
       currentFeedback.category = getInputByTypeFromList(editInputList, "category").toLowerCase();
       currentFeedback.title = getInputByTypeFromList(editInputList, "title");
       currentFeedback.description = getInputByTypeFromList(editInputList, "description");
-    } 
+    }; 
     setFeedbackList(updatedList)
   };
 
@@ -129,9 +128,9 @@ const EditFeedbackContainer = () => {
     <div className='w-full bg-white rounded-[px] px-6 md:px-[42px] py-11 md:pt-[52px] md:pb-[40px] flex flex-col gap-6'>
         <BigHeading text={`Editing ‘${title}’`}/>
         <div className="flex flex-col gap-6">
-          {editFeedbackArray.map(object => {
-            const { id, label, description, input, error} = object;
-            return <div key={id} className="flex flex-col gap-4"> <FormLabelAndInfo id={id} title={label} description={description} errorText={error}/> 
+          {editFeedbackArray.map(feedbackInfo => {
+            const { id, input } = feedbackInfo;
+            return <div key={id} className="flex flex-col gap-4"> <FormLabelAndInfo feedbackInfo={feedbackInfo} inputList={editInputList}/> 
             {input}
             </div>})}
       </div>

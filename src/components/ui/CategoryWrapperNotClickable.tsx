@@ -1,7 +1,7 @@
 import React from 'react'
 
 const CategoryWrapperNotClickable: React.FC<{category: string}> = ( {category} ) => {
-    const largeCategory = category.substring(0, 1).toUpperCase() + category.substring(1, category.length);
+    const largeCategory = category.length === 2 ? category.toUpperCase() : category.substring(0, 1).toUpperCase() + category.substring(1, category.length);
 
   return (
     <div>

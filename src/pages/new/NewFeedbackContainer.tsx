@@ -85,9 +85,9 @@ const NewFeedbackContainer = () => {
     <div className='w-full bg-white rounded-[px] px-6 md:px-[42px] py-11 md:pt-[52px] md:pb-[40px] flex flex-col gap-6'>
       <BigHeading text="Create New Feedback"/>
       <div className="flex flex-col gap-6">
-          {newFeedbackArray.map(object => {
-            const { id, label, description, input, error} = object;
-            return <div key={id} className="flex flex-col gap-4"> <FormLabelAndInfo id={id} title={label} description={description} errorText={error}/> 
+          {newFeedbackArray.map(feedbackInfo => {
+            const { id, input } = feedbackInfo;
+            return <div key={id} className="flex flex-col gap-4"> <FormLabelAndInfo feedbackInfo={feedbackInfo} inputList={newInputList}/> 
             {input}
             </div>})}
       </div>

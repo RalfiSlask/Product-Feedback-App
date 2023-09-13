@@ -22,6 +22,14 @@ export type ProductRequestsType = {
     comments?: CommentsType[];
 };
 
+export type FeedbackInfoType = {
+    id: number;
+    label: string;
+    description: string;
+    input: ReactNode; 
+    error?: string;
+};
+
 export type SelectorInputType = {
     id: number;
     modal: ReactNode;

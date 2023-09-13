@@ -1,33 +1,33 @@
 import { useContext } from "react";
 import FeedbackContext from "../../context/FeedbackContext";
+import { FeedbackInfoType, InputListType } from "../../types/ContextTypes";
 
 type PropsType = {
-    id: number;
-    title: string;
-    description: string;
-    errorText?: string;
+  feedbackInfo: FeedbackInfoType, 
+  inputList: InputListType[],
 };
 
-const FormLabelAndInfo: React.FC<PropsType> = ( {id, title, description, errorText} ) => {
+const FormLabelAndInfo: React.FC<PropsType> = ( { feedbackInfo, inputList } ) => {
+  const { id, error, description, label } = feedbackInfo;
   const context = useContext(FeedbackContext);
 
   if(!context) {
       throw new Error("Does not exist in provider")
   }
 
-  const { newInputList, isAddFeedbackBtnPressed } = context;
+  const { isAddFeedbackBtnPressed } = context;
 
-  const input = newInputList.find(object => object.id === id)?.input;
-  const interactedWith = newInputList.find(object => object.id === id)?.interacted;
+  const input = inputList.find(object => object.id === id)?.input;
+  const interactedWith = inputList.find(object => object.id === id)?.interacted;
 
   const isItError = (isAddFeedbackBtnPressed || interactedWith)  && input === "";
 
   return (
     <div className="flex flex-col gap-[2px]">
-          <label className="font-bold text-[0.8125rem] md:text-[0.875rem] tracking-[-0.181px] text-[#3A4374]">{title}</label>
-        <div className="flex justify-between items-center">
+          <label className="font-bold text-[0.8125rem] md:text-[0.875rem] tracking-[-0.181px] text-[#3A4374]">{label}</label>
+        <div className="flex items-center justify-between">
           <p className="text-[0.8125rem] md:text-[0.875rem] font-normal">{description}</p>
-          {isItError && <p className="text-[#D73737] text-[0.8125rem] font-normal">{errorText}</p>}
+          {isItError && <p className="text-[#D73737] text-[0.8125rem] font-normal">{error}</p>}
         </div>
     </div>
   )

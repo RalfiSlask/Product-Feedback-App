@@ -81,6 +81,24 @@ export const FeedbackContextProvider: React.FC<ContextType> = ( {children} ) => 
     const [selectedFeedback, setSelectedFeedback] = useState<ProductRequestsType>(initialFeedback ? JSON.parse(initialFeedback) : feedbackList[0]);
 
     useEffect(() => {
+        const currentFeedback = {...selectedFeedback};
+        const updatedEditList = [...editInputList];
+        const updatedEditTitle = updatedEditList.find(object => object.label === "title")
+        const updatedEditDescription = updatedEditList.find(object => object.label === "description")
+        if(updatedEditTitle) {
+            updatedEditTitle.input = currentFeedback.title
+        }
+        if(updatedEditDescription) {
+            updatedEditDescription.input = currentFeedback.description;
+        }
+        setEditInputList(updatedEditList)
+    }, [selectedFeedback]);
+
+    useEffect(() => {
+        console.log(editInputList)
+    })
+
+    useEffect(() => {
         if(selectedFeedback !== null) {
             localStorage.setItem("selectedFeedback", JSON.stringify(selectedFeedback))
         }
@@ -139,7 +157,7 @@ export const FeedbackContextProvider: React.FC<ContextType> = ( {children} ) => 
 
     const createNewFeedbackAndAddToList = () => {
         const titleInput = getInputByLabel("title", newInputList);
-        const categoryInput = getInputByLabel("category", newInputList);
+        const categoryInput = getInputByLabel("category", newInputList).toLowerCase();
         const descriptionInput = getInputByLabel("description", newInputList);
         const newObject = {
             id: feedbackList.length + 1,
