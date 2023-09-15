@@ -39,7 +39,7 @@ const MainDetailPage = () => {
         <main className="flex flex-col gap-6">
             <FeedbackContainer feedback={selectedFeedback}/>
             <CommentsContainer comments={comments}/>
-            <AddCommentContainer />
+            <AddCommentContainer errorText="Can’t be empty"/>
         </main>
   </div>
   )

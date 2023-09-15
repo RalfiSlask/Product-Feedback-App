@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Input from "../../components/Input";
 import TextareaInput from "../../components/TextareaInput";
 import SelectorModal from "../new/SelectorModal";
-import FormLabelAndInfo from "../new/FormLabelAndInfo";
+import FormLabelAndInfo from "../../components/FormLabelAndInfo";
 import SelectorInput from "../../components/SelectorInput";
 import { getInputByTypeFromList } from "../../utils/HelperFunctions";
 import { ListType, ProductRequestsType, setListType } from "../../types/ContextTypes";

@@ -11,7 +11,8 @@ type TextAreaInputProps = {
 };
 
 const TextareaInput: React.FC<TextAreaInputProps> = ( {id, errorText, inputList, inputText, setInputList} ) => {
-  const [input, setInput] = useState(inputText);
+  const initialInputValue = inputText ? inputText : "";
+  const [input, setInput] = useState(initialInputValue);
 
   const context = useContext(FeedbackContext);
 
@@ -21,9 +22,7 @@ const TextareaInput: React.FC<TextAreaInputProps> = ( {id, errorText, inputList,
 
   const { isAddFeedbackBtnPressed, updateInputListOnChange } = context;
 
-  const interactedWith = inputList.find(object => object.id === id)?.interacted;
-
-  const isItError = (isAddFeedbackBtnPressed || interactedWith) && input === "";
+  const isItError = isAddFeedbackBtnPressed && input === "";
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setInput(event.target.value);

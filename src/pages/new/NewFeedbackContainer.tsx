@@ -3,7 +3,7 @@ import BigHeading from "../../components/ui/BigHeading";
 import { useNavigate } from "react-router-dom";
 import Input from "../../components/Input";
 import TextareaInput from "../../components/TextareaInput";
-import FormLabelAndInfo from "./FormLabelAndInfo";
+import FormLabelAndInfo from "../../components/FormLabelAndInfo";
 import FeedbackContext from "../../context/FeedbackContext";
 import { useContext, useEffect, useState } from "react";
 import SelectorModal from "./SelectorModal";
@@ -18,14 +18,7 @@ const NewFeedbackContainer = () => {
   };
 
   const { setIsAddFeedbackBtnPressed, newInputList, setNewInputList, createNewFeedbackAndAddToList } = context;
- 
-  useEffect(() => {
-    setNewInputList([
-    {id: 1, label: "title", input: "", interacted: false},
-    {id: 2, label: "category", input: "Feature", interacted: true},
-    {id: 3, label: "description", input: "", interacted: false},
-    ])
-  }, []);
+
 
   const [categoryList, setCategoryList] = useState([
     {id: 1, text: "UI", selected: false},
@@ -77,6 +70,11 @@ const NewFeedbackContainer = () => {
   };
 
   const handleClickOnCancel = () => {
+    setNewInputList([
+      {id: 1, label: "title", input: ""},
+      {id: 2, label: "category", input: "Feature"},
+      {id: 3, label: "description", input: ""},
+      ])
     navigate(-1)
     setIsAddFeedbackBtnPressed(false)
   };

@@ -60,7 +60,7 @@ export type ModalState = {
 };
 
 export type InputListType = {
-    id: number, label: string, input: string | undefined, interacted: boolean;
+    id: number, label: string, input: string | undefined,
 };
 
 

@@ -10,7 +10,8 @@ type InputPropsType = {
 };
 
 const Input: React.FC<InputPropsType> = ( { id, inputList, setInputList, inputText } ) => {
-  const [input, setInput] = useState(inputText);
+  const initialInputValue = inputText ? inputText : "";
+  const [input, setInput] = useState(initialInputValue);
 
   const context = useContext(FeedbackContext);
 
@@ -25,13 +26,16 @@ const Input: React.FC<InputPropsType> = ( { id, inputList, setInputList, inputTe
     updateInputListOnChange(id, event.target.value, inputList, setInputList)
   };
 
-  const interactedWith = inputList.find(object => object.id === id)?.interacted;
-
-  const isItError = (isAddFeedbackBtnPressed || interactedWith) && input === "";
+  const isItError = isAddFeedbackBtnPressed && input === "";
 
   return (
     <div>
-        <input onChange={(e) => handleChange(e)} spellCheck="false" value={input} className={`${isItError ? "border-[#D73737]" : "border-[#F7F8FD] hover:border-[#4661E6]"} w-full rounded-[5px] h-12 bg-[#F7F8FD] outline-none cursor-pointer text-[#3A4374] px-4 md:px-6 border`}></input>
+        <input 
+          onChange={(e) => handleChange(e)} 
+          spellCheck="false" 
+          value={input} 
+          className={`${isItError ? "border-[#D73737]" : "border-[#F7F8FD] hover:border-[#4661E6]"} w-full rounded-[5px] h-12 bg-[#F7F8FD] outline-none cursor-pointer text-[#3A4374] px-4 md:px-6 border`}>
+        </input>
     </div>
   )
 }

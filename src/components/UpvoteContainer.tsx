@@ -12,7 +12,7 @@ const UpvoteContainer: React.FC<{id: number, upvotes: number, suggestion?: boole
     throw new Error("Does not exist in provider");
   };
 
-  const { feedbackList, upvotedList, setUpvotedList, setFeedbackList } = context;
+  const { upvotedList, setUpvotedList } = context;
 
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
     if(!upvotedList.includes(id)) {
@@ -30,15 +30,15 @@ const UpvoteContainer: React.FC<{id: number, upvotes: number, suggestion?: boole
     } else {
       setIsClicked(false)
     }
-  }, [upvotedList])
+  }, [upvotedList, id])
 
   useEffect(() => {
     if(isClicked) {
-      setCurrUpvotes(prev => prev + 1)
+      setCurrUpvotes(upvotes + 1)
     } else {
       setCurrUpvotes(upvotes) 
     }
-  }, [isClicked])
+  }, [isClicked, upvotes])
 
 
   return (

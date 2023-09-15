@@ -8,7 +8,7 @@ type PropsType = {
     arrowColor: string;
 };
 
-const GoBack: React.FC<PropsType> = ( {textColor, arrowColor} ) => {
+const GoBack: React.FC<PropsType> = ( { textColor, arrowColor } ) => {
   const feedbackContext = useContext(FeedbackContext)
   
   if(!feedbackContext) {
