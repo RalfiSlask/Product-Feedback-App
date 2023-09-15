@@ -85,18 +85,32 @@ export const FeedbackContextProvider: React.FC<ContextType> = ( {children} ) => 
     ]);
     const [upvotedList, setUpvotedList] = useState<number[]>(initialUpvoteList ? JSON.parse(initialUpvoteList) : []);
 
-    const selectOptionFromItemsOnClick = (text: string, List: ListType[], setList: setListType) => {
-        const newList = [...List];
-        newList.forEach(object => object.text === text ? object.selected = true : object.selected = false);
-        setList(newList);
+    const selectOptionFromItemsOnClick = (
+        text: string, 
+        List: ListType[], 
+        setList: setListType
+    ) => {
+        const updatedList = List.map(object => {
+            if(object.text === text) {
+                return {...object, selected: true}
+            };
+            return object;
+        });
+        setList(updatedList);
     };
 
-    const updateInputListOnChange = (id: number, input: string | undefined, inputList: InputListType[], setInputList: setInputListType) => {
-        const updatedList = [...inputList]
-        const updatedInput = updatedList.find(object => object.id === id)
-        if(updatedInput) {
-            updatedInput.input = input;
-        }
+    const updateInputListOnChange = (
+        id: number, 
+        input: string | undefined, 
+        inputList: InputListType[], 
+        setInputList: setInputListType
+    ) => {
+        const updatedList = inputList.map(item => {
+            if(item.id === id) {
+                return {...item, input: input}
+            }
+            return item;
+        });
         setInputList(updatedList)
     };
 
@@ -147,25 +161,21 @@ export const FeedbackContextProvider: React.FC<ContextType> = ( {children} ) => 
     };
 
     useEffect(() => {
-        const updatedEditList = [...editInputList];
-        const updatedEditTitle = updatedEditList.find(object => object.label === "title")
-        const updatedEditDescription = updatedEditList.find(object => object.label === "description")
-        if(updatedEditTitle) {
-            updatedEditTitle.input = selectedFeedback.title
-        }
-        if(updatedEditDescription) {
-            updatedEditDescription.input = selectedFeedback.description;
-        }
+        const updatedEditList = editInputList.map(item => {
+            if(item.label === "title") {
+                return {...item, input: selectedFeedback.title}
+            }
+            if(item.label === "description") {
+                return {...item, input: selectedFeedback.description}
+            }
+            return item;
+        });
         setEditInputList(updatedEditList)
     }, [selectedFeedback]); 
 
     useEffect(() => {
         localStorage.setItem("upvoteList", JSON.stringify(upvotedList));
     }, [upvotedList])
-
-    useEffect(() => {
-        console.log(isAddFeedbackBtnPressed)
-    })
 
     useEffect(() => {
         if(selectedFeedback !== null) {
