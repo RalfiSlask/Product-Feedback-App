@@ -87,15 +87,11 @@ export const FeedbackContextProvider: React.FC<ContextType> = ( {children} ) => 
 
     const selectOptionFromItemsOnClick = (
         text: string, 
-        List: ListType[], 
+        list: ListType[], 
         setList: setListType
     ) => {
-        const updatedList = List.map(object => {
-            if(object.text === text) {
-                return {...object, selected: true}
-            };
-            return object;
-        });
+        const updatedList = [...list];
+        updatedList.forEach(object => object.text === text ? object.selected = true : object.selected = false);
         setList(updatedList);
     };
 
