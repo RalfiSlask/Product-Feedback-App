@@ -8,6 +8,7 @@ import {
     setInputListType,
 } from "../types/ContextTypes";
 import { getInputByLabel } from "../utils/HelperFunctions";
+import { getInputByTypeFromList } from "../utils/HelperFunctions";
 
 type FeedbackContextVal = {
     isAddFeedbackBtnPressed: boolean;
@@ -32,6 +33,8 @@ type FeedbackContextVal = {
     filterSuggestionsByCategory: (text: string) => void;
     sortSuggestionsBySelectedOption: (text: string) => void;
     createNewFeedbackAndAddToList: () => void;
+    updateEditFeedback: () => void;
+    updateInputOnStart: (optionList: ListType[], key: keyof ProductRequestsType, setOptionList: setListType) => void;
 };
 
 const FeedbackContext = createContext<FeedbackContextVal | undefined>(undefined);
@@ -40,15 +43,15 @@ type ContextType = {
     children: ReactNode;
 };
 
-const initialFeedback = localStorage.getItem("selectedFeedback");
-const initialFeedbackList = localStorage.getItem("feedbackList");
-const initialUpvoteList = localStorage.getItem("upvoteList");
+const storedFeedback = localStorage.getItem("selectedFeedback");
+const storedFeedbackList = localStorage.getItem("feedbackList");
+const storedUpvoteList = localStorage.getItem("upvoteList");
 
 export const FeedbackContextProvider: React.FC<ContextType> = ( {children} ) => {
-    const [feedbackList, setFeedbackList] = useState<ProductRequestsType[]>(initialFeedbackList ? JSON.parse(initialFeedbackList) : data.productRequests);
+    const [feedbackList, setFeedbackList] = useState<ProductRequestsType[]>(storedFeedbackList ? JSON.parse(storedFeedbackList) : data.productRequests);
     const [isAddFeedbackBtnPressed, setIsAddFeedbackBtnPressed] = useState(false);
     const [suggestions, setSuggestions] = useState<ProductRequestsType[]>(feedbackList.filter(object => object.status === "suggestion"));
-    const [selectedFeedback, setSelectedFeedback] = useState<ProductRequestsType>(initialFeedback ? JSON.parse(initialFeedback) : feedbackList[0]);
+    const [selectedFeedback, setSelectedFeedback] = useState<ProductRequestsType>(storedFeedback ? JSON.parse(storedFeedback) : feedbackList[0]);
     
     // Modal Lists
 
@@ -83,21 +86,61 @@ export const FeedbackContextProvider: React.FC<ContextType> = ( {children} ) => 
         {id: 3, label: "status", input: ""},
         {id: 4, label: "description", input: selectedFeedback.description}
     ]);
-    const [upvotedList, setUpvotedList] = useState<number[]>(initialUpvoteList ? JSON.parse(initialUpvoteList) : []);
+    const [upvotedList, setUpvotedList] = useState<number[]>(storedUpvoteList ? JSON.parse(storedUpvoteList) : []);
 
-    const selectOptionFromItemsOnClick = (text: string, List: ListType[], setList: setListType) => {
+    const selectOptionFromItemsOnClick = (
+        text: string, 
+        List: ListType[], 
+        setList: setListType
+    ) => {
         const newList = [...List];
         newList.forEach(object => object.text === text ? object.selected = true : object.selected = false);
         setList(newList);
     };
 
-    const updateInputListOnChange = (id: number, input: string | undefined, inputList: InputListType[], setInputList: setInputListType) => {
-        const updatedList = [...inputList]
-        const updatedInput = updatedList.find(object => object.id === id)
-        if(updatedInput) {
-            updatedInput.input = input;
-        }
+    const updateInputListOnChange = (
+        id: number, 
+        input: string | undefined, 
+        inputList: InputListType[], 
+        setInputList: setInputListType
+    ) => {
+        const updatedList = inputList.map(item => {
+            if(item.id === id) {
+                return {...item, input: input}
+            }
+            return item;
+        })
+
         setInputList(updatedList)
+    };
+
+    const updateInputOnStart = (
+        optionList: ListType[], 
+        key: keyof ProductRequestsType, 
+        setOptionList: setListType
+    ) => {
+        const updatedInputList = optionList.map(option => {
+            if(option.text.toLowerCase() === selectedFeedback[key]) {
+                return {...option, selected: true}
+            }
+            return option;
+        })
+
+        setOptionList(updatedInputList);
+    }; 
+
+    const updateEditFeedback = () => {
+        const updatedList = feedbackList.map(feedback => {
+            if(feedback.id === selectedFeedback.id) {
+                return {...feedback, 
+                    status: getInputByTypeFromList(editInputList, "status").toLowerCase(), 
+                    category: getInputByTypeFromList(editInputList, "category").toLowerCase(),
+                    title: getInputByTypeFromList(editInputList, "title"),
+                    description: getInputByTypeFromList(editInputList, "description")
+                }
+            } return feedback;
+        })
+        setFeedbackList(updatedList);
     };
 
     const filterSuggestionsByCategory = (text: string) => {
@@ -142,30 +185,26 @@ export const FeedbackContextProvider: React.FC<ContextType> = ( {children} ) => 
             upvotes: 0,
             status: "suggestion",
             description: descriptionInput,
-        }
+        };
         setFeedbackList(prev => [...prev, newObject])
     };
 
     useEffect(() => {
-        const updatedEditList = [...editInputList];
-        const updatedEditTitle = updatedEditList.find(object => object.label === "title")
-        const updatedEditDescription = updatedEditList.find(object => object.label === "description")
-        if(updatedEditTitle) {
-            updatedEditTitle.input = selectedFeedback.title
-        }
-        if(updatedEditDescription) {
-            updatedEditDescription.input = selectedFeedback.description;
-        }
+        const updatedEditList = editInputList.map(item => {
+            if(item.label === "title") {
+                return {...item, input: selectedFeedback.title}
+            }
+            if(item.label === "description") {
+                return {...item, input: selectedFeedback.description}
+            }
+            return item
+        });
         setEditInputList(updatedEditList)
     }, [selectedFeedback]); 
 
     useEffect(() => {
         localStorage.setItem("upvoteList", JSON.stringify(upvotedList));
     }, [upvotedList])
-
-    useEffect(() => {
-        console.log(isAddFeedbackBtnPressed)
-    })
 
     useEffect(() => {
         if(selectedFeedback !== null) {
@@ -204,6 +243,8 @@ export const FeedbackContextProvider: React.FC<ContextType> = ( {children} ) => 
         filterSuggestionsByCategory: filterSuggestionsByCategory,
         sortSuggestionsBySelectedOption: sortSuggestionsBySelectedOption,
         createNewFeedbackAndAddToList: createNewFeedbackAndAddToList,
+        updateEditFeedback: updateEditFeedback,
+        updateInputOnStart: updateInputOnStart,
     };
 
     return (

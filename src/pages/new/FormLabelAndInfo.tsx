@@ -18,9 +18,8 @@ const FormLabelAndInfo: React.FC<PropsType> = ( { feedbackInfo, inputList } ) =>
   const { isAddFeedbackBtnPressed } = context;
 
   const input = inputList.find(object => object.id === id)?.input;
-  const interactedWith = inputList.find(object => object.id === id)?.interacted;
 
-  const isItError = (isAddFeedbackBtnPressed || interactedWith)  && input === "";
+  const isItError = isAddFeedbackBtnPressed   && input === "";
 
   return (
     <div className="flex flex-col gap-[2px]">

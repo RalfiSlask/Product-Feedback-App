@@ -18,9 +18,9 @@ const SortingPanel = () => {
   const navigate = useNavigate();
 
   const { modals, windowSize } = uiContext;
-  const { suggestions } = feedbackContext;
+  const { feedbackList } = feedbackContext;
 
-  const suggestionCount = suggestions.length;
+  const suggestionCount = feedbackList.filter(feedback => feedback.status === "suggestion").length;
 
   const handleClick = () => {
     navigate("/new")

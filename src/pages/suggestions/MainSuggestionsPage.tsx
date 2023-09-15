@@ -29,7 +29,8 @@ const MainSuggestionsPage = () => {
   };
 
   const { windowSize, modals } = uiContext;
-  const { suggestions, setSelectedFeedback } = feedbackContext;
+  const { feedbackList, suggestions, setSelectedFeedback } = feedbackContext;
+  const suggestionCount = feedbackList.filter(feedback => feedback.status === "suggestion").length;
 
   return (
     <>
@@ -42,7 +43,7 @@ const MainSuggestionsPage = () => {
       <main className="bg-[#F7F8FD] w-full md:w-[689px] xl:w-[825px] flex flex-col items-center">
         <SortingPanel />
         <section className="w-[327px] md:w-full mt-8 md:mt-6 flex flex-col gap-4 xl:gap-5 mb-[129px] items-center">
-          {suggestions.length > 0 ? suggestions.map((suggestion, index) => {
+          {suggestionCount > 0 ? suggestions.map((suggestion, index) => {
             return <FeedbackContainer key={index} feedback={suggestion} onClick={handleClick}
             />
           }) : 

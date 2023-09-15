@@ -14,7 +14,6 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
     <FeedbackContextProvider>
       <UIContextProvider>
         <Router>
@@ -28,5 +27,4 @@ root.render(
         </Router>
       </UIContextProvider>
     </FeedbackContextProvider>
-  </React.StrictMode>
 );

@@ -9,8 +9,6 @@ import TextareaInput from "../../components/TextareaInput";
 import SelectorModal from "../new/SelectorModal";
 import FormLabelAndInfo from "../../components/FormLabelAndInfo";
 import SelectorInput from "../../components/SelectorInput";
-import { getInputByTypeFromList } from "../../utils/HelperFunctions";
-import { ListType, ProductRequestsType, setListType } from "../../types/ContextTypes";
 
 const EditFeedbackContainer = () => {
   const uiContext = useContext(UIContext);
@@ -20,8 +18,17 @@ const EditFeedbackContainer = () => {
       throw new Error("Does not exist in provider")
   };
 
+  useEffect(() => {
+    setEditInputList([
+      {id: 1, label: "title", input: selectedFeedback.title},
+      {id: 2, label: "category", input: ""},
+      {id: 3, label: "status", input: ""},
+      {id: 4, label: "description", input: selectedFeedback.description}
+  ])
+  }, []);
+
   const { openModal } = uiContext; 
-  const { selectedFeedback, editInputList, feedbackList, setIsAddFeedbackBtnPressed, setEditInputList, setFeedbackList } = feedbackContext;
+  const { selectedFeedback, editInputList, setIsAddFeedbackBtnPressed, setEditInputList, updateEditFeedback, updateInputOnStart } = feedbackContext;
   const { title } = selectedFeedback;
   const navigate = useNavigate();
 
@@ -39,15 +46,6 @@ const EditFeedbackContainer = () => {
     {id: 3, text: "In-Progress", selected: false},
     {id: 4, text: "Live", selected: false},
   ]);
-
-   const updateInputOnStart = (optionList: ListType[], key: keyof ProductRequestsType, setOptionList: setListType) => {
-    const updatedInputList = [...optionList] 
-    const selectedOption = updatedInputList.find(option => option.text.toLowerCase() === selectedFeedback[key])
-    if(selectedOption) {
-      selectedOption.selected = true;
-    }
-    setOptionList(updatedInputList)
-  }; 
 
   useEffect(() => {
     updateInputOnStart(categoryList, "category", setCategoryList);
@@ -101,23 +99,11 @@ const EditFeedbackContainer = () => {
       setIsAddFeedbackBtnPressed(false);
   };
 
-  const updateFeedback = () => {
-    const updatedList = [...feedbackList];
-    const currentFeedback = updatedList.find(feedback => feedback.id === selectedFeedback.id);
-    if(currentFeedback) {
-      currentFeedback.status = getInputByTypeFromList(editInputList, "status").toLowerCase();
-      currentFeedback.category = getInputByTypeFromList(editInputList, "category").toLowerCase();
-      currentFeedback.title = getInputByTypeFromList(editInputList, "title");
-      currentFeedback.description = getInputByTypeFromList(editInputList, "description");
-    }; 
-    setFeedbackList(updatedList)
-  };
-
   const handleClickOnAddFeedback = () => {
     const allInputsNotEmpty = editInputList.every((object => object.input !== ""))
     if(allInputsNotEmpty) {
       setIsAddFeedbackBtnPressed(false)
-      updateFeedback();
+      updateEditFeedback();
       navigate("/")
     } else {
       setIsAddFeedbackBtnPressed(true)

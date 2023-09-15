@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "yes.js"  ]
+, "yes.js", "trainings.js"  ]
 }
