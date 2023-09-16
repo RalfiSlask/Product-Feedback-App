@@ -11,6 +11,8 @@ type PropsType = {
 };
 
 const PostReplyContainer: React.FC<PropsType> = ( { commentId, replyingTo, closeReply } ) => {
+  const [isError, setIsError] = useState(false);
+  const [replyInput, setReplyInput] = useState("");
   const context = useContext(Context);
   
   if(!context) {
@@ -18,13 +20,17 @@ const PostReplyContainer: React.FC<PropsType> = ( { commentId, replyingTo, close
   };
 
   const { addReplyToComment } = context;
-  const [replyInput, setReplyInput] = useState("");
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setReplyInput(event.target.value)
+    setIsError(false)
   };
   
   const handleClick = () => {
+    if(replyInput === "") {
+      setIsError(true)
+      return
+    }
     const replyObject = {
       content: replyInput,
       replyingTo: replyingTo,
@@ -32,11 +38,12 @@ const PostReplyContainer: React.FC<PropsType> = ( { commentId, replyingTo, close
     };
     addReplyToComment(replyObject, commentId)
     closeReply();
+    setIsError(false)
   };
 
   return (
     <div className='flex items-start justify-between gap-4'>
-        <PostReplyInput onChange={handleChange}/>
+        <PostReplyInput onChange={handleChange} isError={isError}/>
         <ButtonComponent 
             text="Post Reply"
             color="#AD1FEA"
