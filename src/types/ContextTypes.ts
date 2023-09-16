@@ -46,7 +46,7 @@ export type CommentObjectType = {
         name: string;
         username: string;
     };
-}
+};
 
 export type setListType = React.Dispatch<React.SetStateAction<ListType[]>>
 

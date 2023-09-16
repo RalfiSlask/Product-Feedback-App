@@ -5,19 +5,19 @@ import { useContext, useState, ChangeEvent } from 'react';
 import data from "../../data/data.json";
 
 type PropsType = {
-  id: number,
+  commentId: number,
   replyingTo: string;
   closeReply: () => void;
 };
 
-const PostReplyContainer: React.FC<PropsType> = ( { id, replyingTo, closeReply } ) => {
+const PostReplyContainer: React.FC<PropsType> = ( { commentId, replyingTo, closeReply } ) => {
   const context = useContext(Context);
   
   if(!context) {
     throw new Error("Does not exist in provider");
   };
 
-  const { selectedFeedback, feedbackList, setFeedbackList } = context;
+  const { addReplyToComment } = context;
   const [replyInput, setReplyInput] = useState("");
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -25,18 +25,12 @@ const PostReplyContainer: React.FC<PropsType> = ( { id, replyingTo, closeReply }
   };
   
   const handleClick = () => {
-    const updatedFeedbackList = [...feedbackList];
-    const updatedFeedback = updatedFeedbackList.find(object => object.id === selectedFeedback.id);
-    const currentComment = updatedFeedback?.comments?.find(object => object.id === id);
     const replyObject = {
       content: replyInput,
       replyingTo: replyingTo,
       user: data.currentUser,
     };
-    if(currentComment) {
-      currentComment.replies ? currentComment.replies.push(replyObject) : currentComment.replies = [replyObject]
-    };
-    setFeedbackList(updatedFeedbackList)
+    addReplyToComment(replyObject, commentId)
     closeReply();
   };
 

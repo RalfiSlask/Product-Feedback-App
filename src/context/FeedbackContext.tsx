@@ -7,6 +7,7 @@ import {
     setListType,
     setInputListType,
     CommentObjectType,
+    RepliesType,
 } from "../types/ContextTypes";
 import { getInputByLabel } from "../utils/HelperFunctions";
 import { getInputByTypeFromList } from "../utils/HelperFunctions";
@@ -37,6 +38,7 @@ type FeedbackContextVal = {
     updateEditFeedback: () => void;
     updateInputOnStart: (optionList: ListType[], key: keyof ProductRequestsType, setOptionList: setListType) => void;
     addNewComment: ( commentObject: CommentObjectType ) => void;
+    addReplyToComment: ( replyObject: RepliesType, commentId: number ) => void;
 };
 
 const FeedbackContext = createContext<FeedbackContextVal | undefined>(undefined);
@@ -91,26 +93,49 @@ export const FeedbackContextProvider: React.FC<ContextType> = ( {children} ) => 
     const [upvotedList, setUpvotedList] = useState<number[]>(storedUpvoteList ? JSON.parse(storedUpvoteList) : []);
 
     const addNewComment = ( commentObject: CommentObjectType) => {
-
         const updatedFeedbackList = feedbackList.map(feedback => {
             if(feedback.id !== selectedFeedback.id) {
                 return feedback
             };
 
             // if comment array exists add the new comment, else create that comment array with the comment in it
-
             const updatedComments = feedback.comments? [...feedback.comments, commentObject] : [commentObject]
             return { ...feedback, comments: updatedComments}
         });
 
         // updating both the feedbackList and selectedFeedback
-
         const updatedSelectedFeedback = updatedFeedbackList.find(feedback => feedback.id === selectedFeedback.id);
      
         setFeedbackList(updatedFeedbackList)
         if(updatedSelectedFeedback) {
             setSelectedFeedback(updatedSelectedFeedback);
         };
+    };
+
+    const addReplyToComment = ( replyObject: RepliesType, commentId: number ) => {
+        const updatedFeedbackList = feedbackList.map(feedback => {
+            // Finding the current selected feedback
+            if(feedback.id === selectedFeedback.id) {
+                const updatedComments = feedback.comments?.map(comment => {
+                    // If the comment matches the current comments Id
+                    if(comment.id === commentId) {
+                        return { 
+                            ...comment, 
+                            replies: comment.replies ? [...comment.replies, replyObject] : [replyObject] 
+                        }
+                    } 
+                    return comment;  
+                });
+                // update with updatedComments
+                return {...feedback, comments: updatedComments}  
+            } 
+            return feedback;
+        });  
+        setFeedbackList(updatedFeedbackList)
+        const updatedSelectedFeedback = updatedFeedbackList.find(feedback => feedback.id === selectedFeedback.id);
+        if(updatedSelectedFeedback) {
+            setSelectedFeedback(updatedSelectedFeedback)
+        }
     };
 
     const selectOptionFromItemsOnClick = (
@@ -216,7 +241,7 @@ export const FeedbackContextProvider: React.FC<ContextType> = ( {children} ) => 
     useEffect(() => {
 
         // adding the starting inputs for title and description from the selected Feedback
-        
+
         const updatedEditList = editInputList.map(item => {
             if(item.label === "title") {
                 return {...item, input: selectedFeedback.title}
@@ -273,6 +298,7 @@ export const FeedbackContextProvider: React.FC<ContextType> = ( {children} ) => 
         updateEditFeedback: updateEditFeedback,
         updateInputOnStart: updateInputOnStart,
         addNewComment: addNewComment,
+        addReplyToComment: addReplyToComment,
     };
 
     return (

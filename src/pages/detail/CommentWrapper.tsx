@@ -26,7 +26,7 @@ const CommentWrapper: React.FC<{comment: CommentsType}> = ( {comment} ) => {
             </div>
             <div className='flex flex-col md:ml-[72px] gap-6'>
                 <p className='text-[0.8125rem] md:text-[0.9375rem]'>{content}</p>
-                {isReplyInputActive && <PostReplyContainer id={id} replyingTo={user.username} closeReply={closeReplyInput}/>}
+                {isReplyInputActive && <PostReplyContainer commentId={id} replyingTo={user.username} closeReply={closeReplyInput}/>}
             </div>
         </div>
         <div className='flex flex-col gap-6 md:gap-4 xl:gap-8 w-[93%]'>

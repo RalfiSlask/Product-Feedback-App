@@ -26,7 +26,7 @@ const ReplyWrapper: React.FC<{id: number, reply: RepliesType}> = ( {id, reply} )
           </div>
           <div className='flex flex-col md:ml-[72px] gap-6'>
             <p className='text-[0.8125rem] md:text-[0.9375rem]'><span className='text-[#AD1FEA] font-bold'>@{replyingTo}</span> {content}</p>
-            {isReplyInputActive && <PostReplyContainer id={id} replyingTo={user.username} closeReply={closeReplyInput}/>}
+            {isReplyInputActive && <PostReplyContainer commentId={id} replyingTo={user.username} closeReply={closeReplyInput}/>}
           </div>
       </div>
     </div>
