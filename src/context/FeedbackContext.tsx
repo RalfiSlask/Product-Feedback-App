@@ -90,12 +90,12 @@ export const FeedbackContextProvider: React.FC<ContextType> = ( {children} ) => 
 
     const selectOptionFromItemsOnClick = (
         text: string, 
-        List: ListType[], 
+        list: ListType[], 
         setList: setListType
     ) => {
-        const newList = [...List];
-        newList.forEach(object => object.text === text ? object.selected = true : object.selected = false);
-        setList(newList);
+        const updatedList = [...list];
+        updatedList.forEach(object => object.text === text ? object.selected = true : object.selected = false);
+        setList(updatedList);
     };
 
     const updateInputListOnChange = (
@@ -109,8 +109,7 @@ export const FeedbackContextProvider: React.FC<ContextType> = ( {children} ) => 
                 return {...item, input: input}
             }
             return item;
-        })
-
+        });
         setInputList(updatedList)
     };
 
