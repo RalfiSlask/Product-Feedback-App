@@ -6,6 +6,7 @@ import {
     InputListType,
     setListType,
     setInputListType,
+    CommentObjectType,
 } from "../types/ContextTypes";
 import { getInputByLabel } from "../utils/HelperFunctions";
 import { getInputByTypeFromList } from "../utils/HelperFunctions";
@@ -35,6 +36,7 @@ type FeedbackContextVal = {
     createNewFeedbackAndAddToList: () => void;
     updateEditFeedback: () => void;
     updateInputOnStart: (optionList: ListType[], key: keyof ProductRequestsType, setOptionList: setListType) => void;
+    addNewComment: ( commentObject: CommentObjectType ) => void;
 };
 
 const FeedbackContext = createContext<FeedbackContextVal | undefined>(undefined);
@@ -87,6 +89,29 @@ export const FeedbackContextProvider: React.FC<ContextType> = ( {children} ) => 
         {id: 4, label: "description", input: selectedFeedback.description}
     ]);
     const [upvotedList, setUpvotedList] = useState<number[]>(storedUpvoteList ? JSON.parse(storedUpvoteList) : []);
+
+    const addNewComment = ( commentObject: CommentObjectType) => {
+
+        const updatedFeedbackList = feedbackList.map(feedback => {
+            if(feedback.id !== selectedFeedback.id) {
+                return feedback
+            };
+
+            // if comment array exists add the new comment, else create that comment array with the comment in it
+
+            const updatedComments = feedback.comments? [...feedback.comments, commentObject] : [commentObject]
+            return { ...feedback, comments: updatedComments}
+        });
+
+        // updating both the feedbackList and selectedFeedback
+
+        const updatedSelectedFeedback = updatedFeedbackList.find(feedback => feedback.id === selectedFeedback.id);
+     
+        setFeedbackList(updatedFeedbackList)
+        if(updatedSelectedFeedback) {
+            setSelectedFeedback(updatedSelectedFeedback);
+        };
+    };
 
     const selectOptionFromItemsOnClick = (
         text: string, 
@@ -189,6 +214,9 @@ export const FeedbackContextProvider: React.FC<ContextType> = ( {children} ) => 
     };
 
     useEffect(() => {
+
+        // adding the starting inputs for title and description from the selected Feedback
+        
         const updatedEditList = editInputList.map(item => {
             if(item.label === "title") {
                 return {...item, input: selectedFeedback.title}
@@ -244,6 +272,7 @@ export const FeedbackContextProvider: React.FC<ContextType> = ( {children} ) => 
         createNewFeedbackAndAddToList: createNewFeedbackAndAddToList,
         updateEditFeedback: updateEditFeedback,
         updateInputOnStart: updateInputOnStart,
+        addNewComment: addNewComment,
     };
 
     return (

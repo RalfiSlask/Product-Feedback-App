@@ -14,8 +14,8 @@ const AddCommentContainer: React.FC<{errorText: string}> = ( {errorText} ) => {
       throw new Error("Does not exist in provider");
     };
     
-    const { feedbackList, selectedFeedback, setFeedbackList } = context;
-    
+    const { feedbackList, selectedFeedback, setFeedbackList, setSelectedFeedback, addNewComment } = context;
+
     const handleClick = () => {
         if(input === "") {
             setIsError(true)
@@ -28,23 +28,13 @@ const AddCommentContainer: React.FC<{errorText: string}> = ( {errorText} ) => {
             user: data.currentUser, 
         };
 
-        // Creating a new feedback array which i then update with the commentObject
-        
-        const updatedFeedbackList = feedbackList.map(feedback => {
-            if(feedback.id !== selectedFeedback.id) {
-                return feedback
-            };
-
-            const updatedComments = feedback.comments? [...feedback.comments, commentObject] : [commentObject]
-
-            return { ...feedback, comments: updatedComments}
-        });
-  
-        setFeedbackList(updatedFeedbackList)
+        addNewComment(commentObject)
         setInput("");
         setCharactersLeft(250)
         setIsError(false)
     };
+
+    localStorage.clear();
 
     const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         setInput(event.target.value)

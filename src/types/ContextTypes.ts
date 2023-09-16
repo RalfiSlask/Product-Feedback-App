@@ -38,6 +38,16 @@ export type SelectorInputType = {
     setInputList: setInputListType;
 };
 
+export type CommentObjectType = {
+    id: number;
+    content: string;
+    user: {
+        image: string;
+        name: string;
+        username: string;
+    };
+}
+
 export type setListType = React.Dispatch<React.SetStateAction<ListType[]>>
 
 export type setInputListType = React.Dispatch<React.SetStateAction<InputListType[]>>
