@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Product-Feedback-App/static/css/main.d56406ca.css",
+    "main.js": "/Product-Feedback-App/static/js/main.71a855df.js",
+    "static/media/background-header.png": "/Product-Feedback-App/static/media/background-header.bc782ba03942f8efd767.png",
+    "static/media/illustration-empty.svg": "/Product-Feedback-App/static/media/illustration-empty.6ed5b35a7fb831ed20ca5350bc0cbd84.svg",
+    "static/media/icon-suggestions.svg": "/Product-Feedback-App/static/media/icon-suggestions.2709beff19f3deb4adab5cb39341e2f5.svg",
+    "index.html": "/Product-Feedback-App/index.html",
+    "static/media/icon-comments.svg": "/Product-Feedback-App/static/media/icon-comments.aa41e0afa583af30d09d8f817d978908.svg",
+    "static/media/icon-close.svg": "/Product-Feedback-App/static/media/icon-close.dd55c3920b605e815d145ec325dabc0d.svg",
+    "static/media/icon-arrow-down.svg": "/Product-Feedback-App/static/media/icon-arrow-down.dfca900347634d9b18707f16305cbe63.svg",
+    "static/media/icon-arrow-left.svg": "/Product-Feedback-App/static/media/icon-arrow-left.ba4a5a752369c4316e03eb5e8ff6008b.svg",
+    "static/media/icon-arrow-up.svg": "/Product-Feedback-App/static/media/icon-arrow-up.e9501da94701835b7ea3b72e010ff8b3.svg",
+    "static/media/icon-hamburger.svg": "/Product-Feedback-App/static/media/icon-hamburger.a8bc4c8c0391bf4ff8e8cb1d035d0f79.svg",
+    "static/media/icon-check.svg": "/Product-Feedback-App/static/media/icon-check.121f050674ec6d7b94e2f2510cd50616.svg",
+    "main.d56406ca.css.map": "/Product-Feedback-App/static/css/main.d56406ca.css.map",
+    "main.71a855df.js.map": "/Product-Feedback-App/static/js/main.71a855df.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d56406ca.css",
+    "static/js/main.71a855df.js"
+  ]
+}
