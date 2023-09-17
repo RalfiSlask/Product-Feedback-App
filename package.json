@@ -1,7 +1,7 @@
 {
   "name": "product",
   "version": "0.1.0",
-  "homepage": "https://ralfislask.github.io/Product-Feedback-App",
+  "homepage": "https://Ralfislask.github.io/Product-Feedback-App",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
