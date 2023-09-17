@@ -1,7 +1,6 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import MainSuggestionsPage from './pages/suggestions/main/MainSuggestionsPage';
 import Roadmap from './pages/roadmap/MainRoadmapPage';
 import { FeedbackContextProvider } from './context/FeedbackContext';
