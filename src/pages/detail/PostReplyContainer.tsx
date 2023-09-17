@@ -44,12 +44,16 @@ const PostReplyContainer: React.FC<PropsType> = ( { commentId, replyingTo, close
   return (
     <div className='flex items-start justify-between gap-4'>
         <PostReplyInput onChange={handleChange} isError={isError}/>
+        <div className='flex flex-col items-center justify-between h-full'>
         <ButtonComponent 
             text="Post Reply"
             color="#AD1FEA"
             dimensions='w-[117px] h-10 md:h-[44px]'
             onClick={handleClick}
         />
+         {isError && <p className="text-[#D73737] text-[0.8125rem] font-normal">Can’t be empty</p>}
+        </div>
+ 
     </div>
   )
 }

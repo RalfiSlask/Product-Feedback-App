@@ -1,5 +1,5 @@
-import GoBack from "../../components/ui/GoBack";
-import NewFeedbackContainer from "./NewFeedbackContainer";
+import GoBack from "../../../components/ui/GoBack";
+import NewFeedbackContainer from "../NewFeedbackContainer";
 
 const MainNewPage = () => {
 

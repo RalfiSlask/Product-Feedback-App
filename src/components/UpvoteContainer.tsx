@@ -30,7 +30,7 @@ const UpvoteContainer: React.FC<{id: number, upvotes: number, suggestion?: boole
     } else {
       setIsClicked(false)
     }
-  }, [upvotedList, id])
+  }, [upvotedList, id]);
 
   useEffect(() => {
     if(isClicked) {
@@ -38,7 +38,7 @@ const UpvoteContainer: React.FC<{id: number, upvotes: number, suggestion?: boole
     } else {
       setCurrUpvotes(upvotes) 
     }
-  }, [isClicked, upvotes])
+  }, [isClicked, upvotes]);
 
 
   return (

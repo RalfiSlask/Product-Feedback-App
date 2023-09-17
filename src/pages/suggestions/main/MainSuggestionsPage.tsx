@@ -1,17 +1,17 @@
-import FeedbackBoard from "./FeedbackBoard";
-import SortingPanel from "./SortingPanel";
+import FeedbackBoard from "../FeedbackBoard";
+import SortingPanel from "../SortingPanel";
 import { useContext } from "react";
-import FeedbackContext from "../../context/FeedbackContext";
-import FeedbackContainer from "../../components/FeedbackContainer";
-import RoadmapContainer from "./RoadmapContainer";
-import CategoryContainer from "./ui/CategoryContainer";
-import BlackLightbox from "../../components/ui/BlackLightbox";
-import Sidebar from "./ui/Sidebar";
-import WhiteLightbox from "../../components/ui/WhiteLightbox";
-import ThereIsNoFeedbackContainer from "./ui/ThereIsNoFeedbackContainer";
+import FeedbackContext from "../../../context/FeedbackContext";
+import FeedbackContainer from "../../../components/FeedbackContainer";
+import RoadmapContainer from "../RoadmapContainer";
+import CategoryContainer from "../ui/CategoryContainer";
+import BlackLightbox from "../../../components/ui/BlackLightbox";
+import Sidebar from "../ui/Sidebar";
+import WhiteLightbox from "../../../components/ui/WhiteLightbox";
+import ThereIsNoFeedbackContainer from "../ui/ThereIsNoFeedbackContainer";
 import { useNavigate } from "react-router-dom";
-import { ProductRequestsType } from "../../types/ContextTypes";
-import UIContext from "../../context/UIContext";
+import { ProductRequestsType } from "../../../types/ContextTypes";
+import UIContext from "../../../context/UIContext";
 
 const MainSuggestionsPage = () => {
   const feedbackContext = useContext(FeedbackContext);

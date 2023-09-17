@@ -1,9 +1,9 @@
-import GoBack from "../../components/GoBack";
-import EditFeedbackContainer from "./EditFeedbackContainer";
-import BlackLightbox from "../../components/ui/BlackLightbox";
-import UIContext from "../../context/UIContext";
+import GoBack from "../../../components/GoBack";
+import EditFeedbackContainer from "../EditFeedbackContainer";
+import BlackLightbox from "../../../components/ui/BlackLightbox";
+import UIContext from "../../../context/UIContext";
 import { useContext } from "react";
-import DeleteModal from "./DeleteModal";
+import DeleteModal from "../DeleteModal";
 
 const MainEditPage = () => {
   const uiContext = useContext(UIContext);

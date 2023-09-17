@@ -1,11 +1,11 @@
-import GoBack from "../../components/GoBack";
-import ButtonComponent from "../../components/ui/ButtonComponent";
+import GoBack from "../../../components/GoBack";
+import ButtonComponent from "../../../components/ui/ButtonComponent";
 import { useNavigate } from "react-router-dom";
-import FeedbackContainer from "../../components/FeedbackContainer";
-import Context from "../../context/FeedbackContext";
+import FeedbackContainer from "../../../components/FeedbackContainer";
+import Context from "../../../context/FeedbackContext";
 import { useContext } from "react";
-import CommentsContainer from "./CommentsContainer";
-import AddCommentContainer from "./AddCommentContainer";
+import CommentsContainer from "../CommentsContainer";
+import AddCommentContainer from "../AddCommentContainer";
 
 const MainDetailPage = () => {
     const context = useContext(Context);
