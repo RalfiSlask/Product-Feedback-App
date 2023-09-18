@@ -34,8 +34,6 @@ const AddCommentContainer: React.FC<{errorText: string}> = ( {errorText} ) => {
         setIsError(false)
     };
 
-    localStorage.clear();
-
     const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         setInput(event.target.value)
         setCharactersLeft(250 - event.target.value.length)
