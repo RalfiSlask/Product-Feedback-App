@@ -1,4 +1,4 @@
-![Product-Feedback-App](./preview.png)
+![Product-Feedback-App](./preview.PNG)
 
 
 Built with
