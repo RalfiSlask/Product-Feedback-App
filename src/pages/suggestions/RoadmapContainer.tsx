@@ -16,7 +16,7 @@ const RoadmapContainer = () => {
   };
 
   return (
-    <div className='bg-white w-[223px] h-[178px] rounded-[10px] p-6 flex flex-col justify-between'>
+    <div className='bg-white w-[223px] xl:w-[255px] h-[178px] rounded-[10px] p-6 flex flex-col justify-between'>
         <div className='flex items-center justify-between'>
             <p className='text-[1.125rem] font-bold text-[#3A4374] tracking-[-0.25px]'>Roadmap</p>
             <p onClick={handleClick} className='text-[#4661E6] font-semibold underline cursor-pointer hover:text-[#8397F8]'>View</p>
