@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState, useEffect } from "react";
+import { createContext, ReactNode, useState, useEffect, useCallback } from "react";
 import data from "../data/data.json";
 import {
     ListType,
@@ -148,7 +148,7 @@ export const FeedbackContextProvider: React.FC<ContextType> = ( {children} ) => 
         setList(updatedList);
     };
 
-    const updateInputListOnChange = (
+    const updateInputListOnChange = useCallback((
         id: number, 
         input: string | undefined, 
         inputList: InputListType[], 
@@ -160,10 +160,13 @@ export const FeedbackContextProvider: React.FC<ContextType> = ( {children} ) => 
             }
             return item;
         });
-        setInputList(updatedList)
-    };
 
-    const updateInputOnStart = (
+        if(JSON.stringify(updatedList) !== JSON.stringify(inputList)) {
+            setInputList(updatedList)
+        };
+    }, []);
+
+    const updateInputOnStart = useCallback((
         optionList: ListType[], 
         key: keyof ProductRequestsType, 
         setOptionList: setListType
@@ -174,9 +177,10 @@ export const FeedbackContextProvider: React.FC<ContextType> = ( {children} ) => 
             }
             return option;
         })
-
-        setOptionList(updatedInputList);
-    }; 
+        if(JSON.stringify(updatedInputList) !== JSON.stringify(optionList)) {
+            setOptionList(updatedInputList);
+        };
+    }, [selectedFeedback]); 
 
     const updateEditFeedback = () => {
         const updatedList = feedbackList.map(feedback => {
@@ -251,8 +255,12 @@ export const FeedbackContextProvider: React.FC<ContextType> = ( {children} ) => 
             }
             return item
         });
-        setEditInputList(updatedEditList)
-    }, [selectedFeedback]); 
+    
+        if(JSON.stringify(updatedEditList) !== JSON.stringify(editInputList)) {
+            setEditInputList(updatedEditList)
+        }; 
+
+    }, [selectedFeedback, editInputList]); 
 
     useEffect(() => {
         localStorage.setItem("upvoteList", JSON.stringify(upvotedList));

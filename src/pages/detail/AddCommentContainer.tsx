@@ -1,5 +1,5 @@
 import ButtonComponent from '../../components/ui/ButtonComponent';
-import { useState, ChangeEvent, useContext, useEffect } from "react";
+import { useState, ChangeEvent, useContext } from "react";
 import Context from '../../context/FeedbackContext';
 import data from "../../data/data.json";
 import { getNextCommentId } from '../../utils/HelperFunctions';
@@ -14,7 +14,7 @@ const AddCommentContainer: React.FC<{errorText: string}> = ( {errorText} ) => {
       throw new Error("Does not exist in provider");
     };
     
-    const { feedbackList, selectedFeedback, setFeedbackList, setSelectedFeedback, addNewComment } = context;
+    const { feedbackList, addNewComment } = context;
 
     const handleClick = () => {
         if(input === "") {

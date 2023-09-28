@@ -9,8 +9,6 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.46",
-    "@types/react": "^18.2.21",
-    "@types/react-dom": "^18.2.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.15.0",
@@ -45,6 +43,9 @@
     ]
   },
   "devDependencies": {
+    "@types/aria-query": "^5.0.2",
+    "@types/react": "^18.2.23",
+    "@types/react-dom": "^18.2.8",
     "gh-pages": "^6.0.0",
     "tailwindcss": "^3.3.3"
   }

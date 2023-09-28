@@ -23,7 +23,7 @@ const SelectorInput: React.FC<SelectorInputType> = ( { id, modal, modalList, inp
     if(selectedCategory) {
       updateInputListOnChange(id, selectedCategory, inputList, setInputList)
     }
-  }, [selectedCategory])
+  }, [selectedCategory, updateInputListOnChange, id, setInputList, inputList])
 
   return (
     <div onClick={handleClick} className="relative">

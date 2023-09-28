@@ -18,6 +18,11 @@ const EditFeedbackContainer = () => {
       throw new Error("Does not exist in provider")
   };
 
+  const { openModal } = uiContext; 
+  const { selectedFeedback, editInputList, setIsAddFeedbackBtnPressed, setEditInputList, updateEditFeedback, updateInputOnStart } = feedbackContext;
+  const { title } = selectedFeedback;
+  const navigate = useNavigate();
+
   useEffect(() => {
     setEditInputList([
       {id: 1, label: "title", input: selectedFeedback.title},
@@ -25,12 +30,7 @@ const EditFeedbackContainer = () => {
       {id: 3, label: "status", input: ""},
       {id: 4, label: "description", input: selectedFeedback.description}
   ])
-  }, []);
-
-  const { openModal } = uiContext; 
-  const { selectedFeedback, editInputList, setIsAddFeedbackBtnPressed, setEditInputList, updateEditFeedback, updateInputOnStart } = feedbackContext;
-  const { title } = selectedFeedback;
-  const navigate = useNavigate();
+  }, [selectedFeedback.title, selectedFeedback.description, setEditInputList]);
 
   const [categoryList, setCategoryList] = useState([
     {id: 1, text: "UI", selected: false},
@@ -50,7 +50,7 @@ const EditFeedbackContainer = () => {
   useEffect(() => {
     updateInputOnStart(categoryList, "category", setCategoryList);
     updateInputOnStart(statusList, "status", setStatusList);
-  }, []);
+  }, [updateInputOnStart, categoryList, statusList]);
 
   const editFeedbackArray = [
       { id: 1, label: "Feedback Title", description: "Add a short, descriptive headline", error: "Can’t be empty",

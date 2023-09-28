@@ -5,7 +5,7 @@ import Input from "../../components/Input";
 import TextareaInput from "../../components/TextareaInput";
 import FormLabelAndInfo from "../../components/FormLabelAndInfo";
 import FeedbackContext from "../../context/FeedbackContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import SelectorModal from "./SelectorModal";
 import SelectorInput from "../../components/SelectorInput";
 
