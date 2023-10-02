@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Product-Feedback-App/static/css/main.163aa8b3.css",
-    "main.js": "/Product-Feedback-App/static/js/main.3aeac330.js",
+    "main.css": "/Product-Feedback-App/static/css/main.aeeb89ac.css",
+    "main.js": "/Product-Feedback-App/static/js/main.b4ca1892.js",
     "static/media/background-header.png": "/Product-Feedback-App/static/media/background-header.bc782ba03942f8efd767.png",
     "static/media/illustration-empty.svg": "/Product-Feedback-App/static/media/illustration-empty.6ed5b35a7fb831ed20ca5350bc0cbd84.svg",
     "static/media/icon-suggestions.svg": "/Product-Feedback-App/static/media/icon-suggestions.2709beff19f3deb4adab5cb39341e2f5.svg",
@@ -13,11 +13,11 @@
     "static/media/icon-arrow-up.svg": "/Product-Feedback-App/static/media/icon-arrow-up.e9501da94701835b7ea3b72e010ff8b3.svg",
     "static/media/icon-hamburger.svg": "/Product-Feedback-App/static/media/icon-hamburger.a8bc4c8c0391bf4ff8e8cb1d035d0f79.svg",
     "static/media/icon-check.svg": "/Product-Feedback-App/static/media/icon-check.121f050674ec6d7b94e2f2510cd50616.svg",
-    "main.163aa8b3.css.map": "/Product-Feedback-App/static/css/main.163aa8b3.css.map",
-    "main.3aeac330.js.map": "/Product-Feedback-App/static/js/main.3aeac330.js.map"
+    "main.aeeb89ac.css.map": "/Product-Feedback-App/static/css/main.aeeb89ac.css.map",
+    "main.b4ca1892.js.map": "/Product-Feedback-App/static/js/main.b4ca1892.js.map"
   },
   "entrypoints": [
-    "static/css/main.163aa8b3.css",
-    "static/js/main.3aeac330.js"
+    "static/css/main.aeeb89ac.css",
+    "static/js/main.b4ca1892.js"
   ]
 }
