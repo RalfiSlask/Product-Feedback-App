@@ -1,7 +1,7 @@
 ![Product-Feedback-App](./preview.PNG)
 
 
-Built with
+**Built with**
 
 - Semantic HTML5 markup
 - CSS
@@ -10,12 +10,12 @@ Built with
 - React
 - Tailwind
 
-Author
+**Author**
 
 - Frontend Mentor - @RalfiSlask
 - GitHub - https://github.com/RalfiSlask
 
-Live server
+**Live server**
 
 - https://ralfislask.github.io/Product-Feedback-App/
 
