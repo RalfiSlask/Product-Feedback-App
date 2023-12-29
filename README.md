@@ -15,11 +15,11 @@
 
 ### Prettier
 
-We used Prettier for our code formatting. It helps to format the code and making it consistent throughout the whole project.
+I used Prettier for code formatting. It helps to format the code and making it consistent throughout the whole project.
 
 ### Eslint
 
-For linting we used ESlint. It helped us catch errors in the code and uphold the teams typescript standards. Our Eslint file
+For linting i used ESlint. It helped me catch errors in the code and uphold typescript standards. The Eslint file
 follows common rules for this kind of project.
 
 ## Live Demo
