@@ -13,17 +13,17 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-    <FeedbackContextProvider>
-      <UIContextProvider>
-        <Router>
-          <Routes>
-            <Route path="/" element={<MainSuggestionsPage />}></Route>
-            <Route path="/roadmap" element={<Roadmap />}></Route>
-            <Route path="/new" element={<CreateNewFeedback />}></Route>
-            <Route path="/edit" element={<MainEditPage />}></Route>
-            <Route path="/details" element={<MainDetailPage />}></Route>
-          </Routes>
-        </Router>
-      </UIContextProvider>
-    </FeedbackContextProvider>
+  <FeedbackContextProvider>
+    <UIContextProvider>
+      <Router>
+        <Routes>
+          <Route path='/' element={<MainSuggestionsPage />}></Route>
+          <Route path='/roadmap' element={<Roadmap />}></Route>
+          <Route path='/new' element={<CreateNewFeedback />}></Route>
+          <Route path='/edit' element={<MainEditPage />}></Route>
+          <Route path='/details' element={<MainDetailPage />}></Route>
+        </Routes>
+      </Router>
+    </UIContextProvider>
+  </FeedbackContextProvider>
 );

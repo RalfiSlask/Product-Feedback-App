@@ -9,7 +9,7 @@ body {
   font-size: 0.8125rem;
   display: flex;
   justify-content: center;
-  background-color: #F7F8FD;
+  background-color: #f7f8fd;
   color: #647196;
   overflow-x: hidden;
 }
@@ -24,4 +24,3 @@ body {
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-

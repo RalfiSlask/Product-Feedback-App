@@ -3,13 +3,19 @@ type PropsType = {
   userName: string;
 };
 
-const ReplyButton: React.FC<PropsType> = ( {onClick, userName} ) => {
-  
+const ReplyButton: React.FC<PropsType> = ({ onClick, userName }) => {
   return (
     <>
-    {userName !== "Zena Kelley" && <p onClick={onClick} className='text-[#4661E6] text-[0.8125rem] font-semibold hover:underline cursor-pointer'>Reply</p>}
+      {userName !== 'Zena Kelley' && (
+        <p
+          onClick={onClick}
+          className='text-[#4661E6] text-[0.8125rem] font-semibold hover:underline cursor-pointer'
+        >
+          Reply
+        </p>
+      )}
     </>
-  )
-}
+  );
+};
 
-export default ReplyButton
+export default ReplyButton;
