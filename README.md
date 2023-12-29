@@ -11,6 +11,17 @@
 - React
 - Tailwind
 
+## Code Formatting and Linting
+
+### Prettier
+
+We used Prettier for our code formatting. It helps to format the code and making it consistent throughout the whole project.
+
+### Eslint
+
+For linting we used ESlint. It helped us catch errors in the code and uphold the teams typescript standards. Our Eslint file
+follows common rules for this kind of project.
+
 ## Live Demo
 
 Explore the live demo of the Product Feedback App [here](https://ralfislask.github.io/Product-Feedback-App/).
@@ -29,15 +40,17 @@ To run the Product Feedback App on your local machine, follow these steps:
 
 ## Description
 
-The Phobia Quiz is an engaging website that will challenge both your speed and knowledge of unusual phobias. It lets you either create
-a new user by writing your name or chose from existing users. Next you will have to answer 10 questions and in the end your results will be displayed to you. You will also if you made a high enough score be placed in a prestigious highscore list with other users.
+Product Feedback App that lets you create suggestions in a feedback board. These can then be moved to different categories including planned, in-progress and live. The user can then view this in a roadmap.
 
-## Gameplay Features
+## Features
 
-- When the user is selected and you arrive to the question section you can pick from four answers, where one is correct.
-- Both the individual question points and the current highscore will be visually updated through animation.
-- If the answer is right recieve plus points, if not get minus points.
-- When the user picks the right answer they will also get a greater score depending on how fast they picked.
+- Filter suggestions by categories.
+- Sort by upvotes or comments.
+- Users can create new feedback including title, category and details.
+- Users can edit feedbacks.
+- Users can create and reply to comments on each feature.
+- Users can upvote.
+- Displays amount of current suggestions.
 
 ## Author
 
